@@ -1,5 +1,5 @@
 <?php 
-
+    //comentário
     include "connect.inc.php";
     include "alunos.class.php";
 
