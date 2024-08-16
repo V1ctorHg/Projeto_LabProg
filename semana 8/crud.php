@@ -1,28 +1,33 @@
 <?php 
-    //comentário
+
     include "connect.inc.php";
     include "alunos.class.php";
 
     $id = 0;
+    $action = 'insert';
+    $actionVal = 'CADASTRAR';
 
-    if (empty($_GET['action'])) {
-        $action = 'insert';
-        $actionVal = 'CADASTRAR';
-    } else {
+    if (!empty($_GET['action'])) {
+        
         $action = $_GET['action'];
         $actionVal = 'ATUALIZAR';
-        $id = $_GET['ID'];
+        $id = $_GET['id'];
     }
 
     $aluno = new Aluno($conn);
 
     $res = $aluno->read();
+    
 
-    //$result = $aluno->read();
-    //$result = $aluno->readOne(1);
 
-    //print("<pre>");
-    //var_dump($result);
+    $resOne = $aluno->readOne('-1');
+
+    
+
+    if($action =='update'){
+        $resOne = $aluno->readOne($id);
+    }
+    
 ?>
 
 
@@ -30,64 +35,68 @@
 $nameErr = $emailErr = $telErr = $cpfErr = "";
 $nome = $email = $telefone = $cpf = "";
 $valName = $valEmail = $valTel = $valCpf = "";
-$formAction = "crud.php";
-$button = "Enviar";
-$isValid = false;
+$FormularioAcao = "crud.php";
+
+$EstaValido = false;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
-    $isValid = True;
+    $EstaValido = True;
 
   if (empty($_POST["nome"])) {
     $nameErr = "Name is required";
-    $isValid = False;
+    $EstaValido = False;
   } else {
     $nome = test_input($_POST["nome"]);
     if (!preg_match("/^[a-zA-Z-' ]*$/",$nome)) {
         $nameErr = "Only letters and white space allowed";
-        $valName = "Incorreto";
-        $isValid = False;
+        $valName = "ERRADO";
+        $EstaValido = False;
     } else {
-        $valName = "Correto";
+        $valName = "CERTO";
     }
   }
   
   if (empty($_POST["email"])) {
     $emailErr = "Email is required";
-    $isValid = False;
+    $EstaValido = False;
   } else {
     $email = test_input($_POST["email"]);
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $emailErr = "Invalid email format";
-        $valEmail = "Incorreto";
-        $isValid = False;
+        $valEmail = "ERRADO";
+        $EstaValido = False;
     } else {
-        $valEmail = "Correto";
+        $valEmail = "CERTO";
     }
   }
 
   if (empty($_POST["telefone"])) {
     $telefone = "";
+    $EstaValido = False;
+    $telErr = "Telefone requerido";
   } else {
     $telefone = test_input($_POST["telefone"]);
     if (validarTelefone($telefone)) {
-        $valTel = "Correto";
+        $valTel = "CERTO";
     } else {
-        $valTel = "Incorreto";
+        $valTel = "ERRADO";
         $telErr = "Invalid telephone format";
-        $isValid = False;
+        $EstaValido = False;
     }
   }
 
   if (empty($_POST["cpf"])) {
     $cpf = "";
+    $EstaValido = False;
+    $cpfErr = "CPF requerido";
   } else {
     $cpf = test_input($_POST["cpf"]);
     if (validarCPF($cpf)) {
-        $valCpf = "Correto";
+        $valCpf = "CERTO";
     } else {
-        $valCpf = "Incorreto";
+        $valCpf = "ERRADO";
         $cpfErr = "Invalid CPF format";
-        $isValid = False;
+        $EstaValido = False;
     }
   }
 }
@@ -131,7 +140,7 @@ function test_input($data) {
   return $data;
 }
 
-if ($isValid) {
+if ($EstaValido) {
 
     if (empty($_POST['action'])) {
         $action = $_GET['action'];
@@ -142,6 +151,8 @@ if ($isValid) {
 
     if ($action == 'insert') {
         $aluno->create($_POST);
+    } else if ($action == 'update') {
+        $aluno->update($_POST);
     }
     
 
@@ -159,54 +170,53 @@ if ($isValid) {
         <!-- Conteúdo -->
          <section class="container">
             <div class="">
-                <form action="<?php echo $formAction; ?>" method="post">
-                    <input type="hidden" name="ID" value="">
+                <form action="<?php echo $FormularioAcao; ?>" method="post">
+                    <input type="hidden" name="ID" value="<?php echo !empty($resOne) ? $resOne[0]['ID'] : ''; ?>">
                     <input type="hidden" name="action" value="<?php echo $action; ?>">
 
-                    Name: <input type="text" name="nome" value="<?php echo $nome; ?>">
+                    Name: <input type="text" name="nome" value="<?php echo !empty($resOne) ? $resOne[0]['nome'] : $nome; ?>">
                     <span class="error">* <?php echo $nameErr;?></span>
-                    <br><br>
-                    E-mail: <input type="text" name="email" value="<?php echo $email; ?>">
+                    <br>
+                    E-mail: <input type="text" name="email" value="<?php echo !empty($resOne) ? $resOne[0]['email'] : $email; ?>">
                     <span class="error">* <?php echo $emailErr;?></span>
-                    <br><br>
-                    Telefone: <input type="text" name="telefone" value="<?php echo $telefone; ?>">
+                    <br>
+                    Telefone: <input type="text" name="telefone" value="<?php echo !empty($resOne) ? $resOne[0]['telefone'] : $telefone; ?>">
                     <span class="error"><?php echo $telErr;?></span>
-                    <br><br>
-                    CPF: <input type="text" name="cpf" value="<?php echo $cpf; ?>">
+                    <br>
+                    CPF: <input type="text" name="cpf" value="<?php echo !empty($resOne) ? $resOne[0]['cpf'] : $cpf; ?>">
                     <span class="error"><?php echo $cpfErr;?></span>
-                    <br><br>
-                    <input type="submit" name="submit" value="<?php echo $button ?>">  
+                    <br>
+                    <input type="submit" name="submit" value="<?php echo $actionVal ?>">  
                     <input type="hidden" name="valTel" value="<?php echo $valTel; ?>">
                     <input type="hidden" name="valName" value="<?php echo $valName; ?>">
                     <input type="hidden" name="valEmail" value="<?php echo $valEmail; ?>">
                     <input type="hidden" name="valCpf" value="<?php echo $valCpf; ?>">
                 </form>
             </div>            
-         </section>         
-<br><br><br><br><br><br>
+         </section>  
         <!-- Lista -->
         <section class="container">
             <table>
                 <tr>
                     <th>ID</th>
-                    <th>Nome</th>
-                    <th>E-mail</th>
-                    <th>Telefone</th>
-                    <th>Cpf</th>
-                    <th>&nbsp;</th>
-                    <th>&nbsp;</th>
+                    <th>nome</th>
+                    <th>e-mail</th>
+                    <th>telefone</th>
+                    <th>CPF</th>
+                    <th>Editar</th>
+                    <th>Deletar</th>
                 </tr>
 <?php 
     foreach ($res as $r) {
         echo ("
             <tr>
                 <td>{$r['ID']}</td>
-                <td>{$r['Nome']}</td>
-                <td>{$r['Email']}</td>
-                <td>{$r['Telefone']}</td>
-                <td>{$r['Cpf']}</td>
-                <td>E</td>
-                <td>X</td>
+                <td>{$r['nome']}</td>
+                <td>{$r['email']}</td>
+                <td>{$r['telefone']}</td>
+                <td>{$r['cpf']}</td>
+                <td><a href='crud.php?action=update&id={$r['ID']}'>E</a></td>
+                <td><a href='formAction.php?action=delete&id={$r['ID']}'>X</a></td>
             </tr>");
     }
 ?>

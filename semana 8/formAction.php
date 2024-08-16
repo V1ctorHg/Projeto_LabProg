@@ -13,7 +13,13 @@
 
     if ($action == 'insert') {
         $aluno->create($_POST);
+    }else if ($action == 'delete') {
+        $aluno->delete($id);
+
+    }else if($action == 'update'){
+        $aluno->update($_POST);
     }
+    
     
 
     header('Location: crud.php');
