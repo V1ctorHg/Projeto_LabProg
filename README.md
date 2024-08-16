@@ -10,13 +10,13 @@ Crie uma pasta no Xampp/htdoc onde irá rodar o projeto e inicie um git bash:
 
 Para rodar use o localhost
 
-Realizar commits: Abre o GitHub Desktop, adicione o repostorio selecionando o caminho da pasta feita pelo git clone e abra-o.
-Marque as alterações feitas no arquivo que queria subir para o git e adicione um Título para o commit e envie.
-Na tela Principal do Desktop selecione Push Origin
+Realizar commits: Abre o GitHub Desktop, adicione o repostorio selecionando o caminho da pasta feita pelo git clone e abra-o.<br>
+Marque as alterações feitas no arquivo que queria subir para o git e adicione um Título para o commit e envie.<br>
+Na tela Principal do Desktop selecione Push Origin<br>
 
-**Criar Branchs para não subir direto na MAIN**
-Na aba superior do desktop você pode trocar a branch ou adicionar uma nova em "Current Branch"
-Caso seja necessário confirmar a Pull para a main, basta ir no github Web, Pull Requests, e fazer uma solicitação
+##Criar Branchs para não subir direto na MAIN##
+Na aba superior do desktop você pode trocar a branch ou adicionar uma nova em "Current Branch"<br>
+Caso seja necessário confirmar a Pull para a main, basta ir no github Web, Pull Requests, e fazer uma solicitação<br>
 
 ##
 
@@ -51,4 +51,6 @@ Enviar alterações para o repositório
 ```bash
   git push origin nome-da-branch
 ```
+
+##
 
