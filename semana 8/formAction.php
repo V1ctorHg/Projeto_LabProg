@@ -1,23 +1,23 @@
 <?php 
     include "connect.inc.php";
-    include "alunos.class.php";
+    include "estudante.class.php";
 
     if (empty($_POST['action'])) {
         $action = $_GET['action'];
-        $id = $_GET['id'];
+        $matricula = $_GET['matricula'];
     } else {
         $action = $_POST['action'];
     }
 
-    $aluno = new Aluno($conn);
+    $estudante = new Estudante($conn);
 
     if ($action == 'insert') {
-        $aluno->create($_POST);
+        $estudante->create($_POST);
     }else if ($action == 'delete') {
-        $aluno->delete($id);
+        $estudante->delete($matricula);
 
     }else if($action == 'update'){
-        $aluno->update($_POST);
+        $estudante->update($_POST);
     }
     
     

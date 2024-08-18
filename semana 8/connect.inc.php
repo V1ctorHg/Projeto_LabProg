@@ -1,7 +1,7 @@
 <?php 
 
 $host = "localhost";
-$db_name = "SIN143";
+$db_name = "eventcontroldb";
 $username = "root";
 $password = "";
 

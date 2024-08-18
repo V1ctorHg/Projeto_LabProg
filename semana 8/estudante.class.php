@@ -1,21 +1,23 @@
 <?php
 
-class Aluno {
-    private $id;
+class Estudante {
+    private $matricula;
     private $nome;
     private $email;
-    private $telefone;
-    private $CPF;
+    private $senha;
+    private $pontos;
 
     private $conn;
+
+    
 
     public function __construct($db) {
         $this->conn = $db;
     }
 
     public function create($post) {
-        $sql = "INSERT INTO alunos (nome, email, telefone, CPF) VALUES
-        ('{$post['nome']}', '{$post['email']}', '{$post['telefone']}', '{$post['cpf']}')";
+        $sql = "INSERT INTO estudante (matricula, nome, email, senha, pontos) VALUES
+        ('{$post['matricula']}', '{$post['nome']}', '{$post['email']}', '{$post['senha']}', '0')";
         print($sql);
         if ($this->conn->query($sql) === TRUE) {
             return true;
@@ -26,19 +28,19 @@ class Aluno {
     }
 
     public function read() {
-        $sql = "SELECT * FROM alunos";
+        $sql = "SELECT * FROM estudante";
         $result = $this->conn->query($sql);
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function readOne($id) {
-        $sql = "SELECT * FROM alunos WHERE ID = $id";
+    public function readOne($matricula) {
+        $sql = "SELECT * FROM estudante WHERE matricula = $matricula";
         $result = $this->conn->query($sql);
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function delete($id){
-        $sql = "DELETE FROM alunos WHERE ID = $id";
+    public function delete($matricula){
+        $sql = "DELETE FROM estudante WHERE matricula = $matricula";
         $result = $this->conn->query($sql);
         
         return $result;
@@ -47,12 +49,11 @@ class Aluno {
 
     public function update($post){
 
-        $sql = "UPDATE alunos
+        $sql = "UPDATE estudante
                 SET nome = '{$post['nome']}',
                     email = '{$post['email']}',
-                    telefone = '{$post['telefone']}',
-                    CPF = '{$post['cpf']}'
-                WHERE ID = {$post['ID']}";
+                    senha = '{$post['senha']}'
+                WHERE matricula = {$post['matricula']}";
 
         $result = $this->conn->query($sql);
 
@@ -61,7 +62,7 @@ class Aluno {
 
     public function readPag($pag,$linhas) {
         $offset = $pag * $linhas;
-        $sql = "SELECT * FROM alunos LIMIT $linhas OFFSET $offset";
+        $sql = "SELECT * FROM estudante LIMIT $linhas OFFSET $offset";
         $result = $this->conn->query($sql);
         return $result->fetch_all(MYSQLI_ASSOC);
     }
