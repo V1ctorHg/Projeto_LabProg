@@ -1,11 +1,10 @@
 <?php
 
-class Estudante {
-    private $matricula;
+class Administrador {
+    private $matricula_admin;
     private $nome;
     private $email;
     private $senha;
-    private $pontos;
 
     private $conn;
 
@@ -16,8 +15,8 @@ class Estudante {
     }
 
     public function create($post) {
-        $sql = "INSERT INTO estudante (matricula, nome, email, senha, pontos) VALUES
-        ('{$post['matricula']}', '{$post['nome']}', '{$post['email']}', '{$post['senha']}', '0')";
+        $sql = "INSERT INTO estudante (nome, email, senha) VALUES
+        ('{$post['nome']}', '{$post['email']}', '{$post['senha']}')";
         print($sql);
         if ($this->conn->query($sql) === TRUE) {
             return true;
@@ -28,19 +27,19 @@ class Estudante {
     }
 
     public function read() {
-        $sql = "SELECT * FROM estudante";
+        $sql = "SELECT * FROM administrador";
         $result = $this->conn->query($sql);
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function readOne($matricula) {
-        $sql = "SELECT * FROM estudante WHERE matricula = $matricula";
+    public function readOne($matricula_admin) {
+        $sql = "SELECT * FROM administrador WHERE matricula_admin = $matricula_admin";
         $result = $this->conn->query($sql);
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function delete($matricula){
-        $sql = "DELETE FROM estudante WHERE matricula = $matricula";
+    public function delete($matricula_admin){
+        $sql = "DELETE FROM administrador WHERE matricula_admin = $matricula_admin";
         $result = $this->conn->query($sql);
         
         return $result;
@@ -49,11 +48,11 @@ class Estudante {
 
     public function update($post){
 
-        $sql = "UPDATE estudante
+        $sql = "UPDATE administrador
                 SET nome = '{$post['nome']}',
                     email = '{$post['email']}',
                     senha = '{$post['senha']}'
-                WHERE matricula = {$post['matricula']}";
+                WHERE matricula_admin = {$post['matricula_admin']}";
 
         $result = $this->conn->query($sql);
 

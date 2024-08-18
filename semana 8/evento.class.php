@@ -1,11 +1,11 @@
 <?php
 
-class Estudante {
-    private $matricula;
+class Evento {
+    private $cod_evento;
     private $nome;
-    private $email;
-    private $senha;
-    private $pontos;
+    private $descricao;
+    private $datahora_ini;
+    private $datahora_fim;
 
     private $conn;
 
@@ -16,8 +16,8 @@ class Estudante {
     }
 
     public function create($post) {
-        $sql = "INSERT INTO estudante (matricula, nome, email, senha, pontos) VALUES
-        ('{$post['matricula']}', '{$post['nome']}', '{$post['email']}', '{$post['senha']}', '0')";
+        $sql = "INSERT INTO evento (nome, descricao, datahora_ini, datahora_fim) VALUES
+        ('{$post['nome']}', '{$post['descricao']}', '{$post['datahora_ini']}', '{$post['datahora_fim']}')";
         print($sql);
         if ($this->conn->query($sql) === TRUE) {
             return true;
@@ -28,19 +28,19 @@ class Estudante {
     }
 
     public function read() {
-        $sql = "SELECT * FROM estudante";
+        $sql = "SELECT * FROM evento";
         $result = $this->conn->query($sql);
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function readOne($matricula) {
-        $sql = "SELECT * FROM estudante WHERE matricula = $matricula";
+    public function readOne($cod_evento) {
+        $sql = "SELECT * FROM evento WHERE cod_evento = $cod_evento";
         $result = $this->conn->query($sql);
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function delete($matricula){
-        $sql = "DELETE FROM estudante WHERE matricula = $matricula";
+    public function delete($cod_evento){
+        $sql = "DELETE FROM evento WHERE cod_evento = $cod_evento";
         $result = $this->conn->query($sql);
         
         return $result;
@@ -49,11 +49,12 @@ class Estudante {
 
     public function update($post){
 
-        $sql = "UPDATE estudante
+        $sql = "UPDATE evento
                 SET nome = '{$post['nome']}',
-                    email = '{$post['email']}',
-                    senha = '{$post['senha']}'
-                WHERE matricula = {$post['matricula']}";
+                    descricao = '{$post['descricao']}',
+                    datahora_ini = '{$post['datahora_ini']}',
+                    datahora_fim = '{$post['datahora_fim']}'
+                WHERE cod_evento = {$post['cod_evento']}";
 
         $result = $this->conn->query($sql);
 

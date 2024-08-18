@@ -1,11 +1,11 @@
 <?php
 
-class Estudante {
-    private $matricula;
+class Curso {
+    private $cod_curso;
     private $nome;
-    private $email;
-    private $senha;
-    private $pontos;
+    private $datahora_ini;
+    private $datahora_fim;
+    private $horas;
 
     private $conn;
 
@@ -16,8 +16,8 @@ class Estudante {
     }
 
     public function create($post) {
-        $sql = "INSERT INTO estudante (matricula, nome, email, senha, pontos) VALUES
-        ('{$post['matricula']}', '{$post['nome']}', '{$post['email']}', '{$post['senha']}', '0')";
+        $sql = "INSERT INTO curso (nome, datahora_ini, datahora_fim, horas) VALUES
+        ('{$post['nome']}', '{$post['datahora_ini']}', '{$post['datahora_fim']}', '{$post['horas']}')";
         print($sql);
         if ($this->conn->query($sql) === TRUE) {
             return true;
@@ -28,19 +28,19 @@ class Estudante {
     }
 
     public function read() {
-        $sql = "SELECT * FROM estudante";
+        $sql = "SELECT * FROM curso";
         $result = $this->conn->query($sql);
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function readOne($matricula) {
-        $sql = "SELECT * FROM estudante WHERE matricula = $matricula";
+    public function readOne($cod_curso) {
+        $sql = "SELECT * FROM curso WHERE cod_curso = $cod_curso";
         $result = $this->conn->query($sql);
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function delete($matricula){
-        $sql = "DELETE FROM estudante WHERE matricula = $matricula";
+    public function delete($cod_curso){
+        $sql = "DELETE FROM curso WHERE cod_curso = $cod_curso";
         $result = $this->conn->query($sql);
         
         return $result;
@@ -49,11 +49,12 @@ class Estudante {
 
     public function update($post){
 
-        $sql = "UPDATE estudante
+        $sql = "UPDATE curso
                 SET nome = '{$post['nome']}',
-                    email = '{$post['email']}',
-                    senha = '{$post['senha']}'
-                WHERE matricula = {$post['matricula']}";
+                    datahora_ini = '{$post['datahora_ini']}',
+                    datahora_fim = '{$post['datahora_fim']}',
+                    horas= '{$post['horas']}'
+                WHERE cod_curso = {$post['cod_curso']}";
 
         $result = $this->conn->query($sql);
 
