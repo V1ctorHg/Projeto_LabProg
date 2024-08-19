@@ -7,6 +7,8 @@
 
     text-decoration: none;
     list-style-type: none;
+
+    scroll-behavior: smooth;
 }
 
 :root {
@@ -48,7 +50,6 @@ ul li .about_link:hover {
     font-weight: bold;
     /* transition: font-weight .3s; */
 }
-
 
 /* ---------- HERO ---------- */
 .container_middle > #hero {
@@ -112,5 +113,42 @@ ul li .about_link:hover {
 
 /* ---------- SOBRE ---------- */
 .container_middle > #about {
-    border: 3px solid blue;
+    /* border: 3px solid blue; */
+}
+
+#about .flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container_info {
+    padding: 1em;
+}
+
+#about .title_about {
+    /* margin: .5em 0 0 1em; */
+    padding: .5em 0 0 .5em;
+
+    font-size: 2.5em;
+    font-family: var(--mainTitleFont);
+}
+
+#about .about_desc {
+    margin: .5em 0 1.5em 1em;
+    font-family: var(--mainSubTextFont);
+    font-size: 1.1em;
+}
+
+.container_info .profile_pic {
+    width: 10em;
+    border-radius: 3px;
+}
+
+.container_info .container_text_info .info {
+    font-family: var(--mainSubTextFont);
+}
+
+.container_info .container_text_info .info span {
+    font-weight: 700;
 }
