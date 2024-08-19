@@ -20,7 +20,7 @@ Caso seja necessário confirmar a Pull para a main, basta ir no github Web, Pull
 
 ##
 
-##Para commitar em código, primeiramente abra o gitBash na pasta do repositório ou no cmd do VSCode
+Para commitar em código, primeiramente abra o gitBash na pasta do repositório ou no cmd do VSCode
 
 Verificar alterações no repositório
 
@@ -51,6 +51,20 @@ Enviar alterações para o repositório
 ```bash
   git push origin nome-da-branch
 ```
+
+Verificar atualizações do projeto
+
+```bash
+  git status 
+  git fetch
+```
+
+Atualizar arquivos para o repositório
+
+```bash
+  git pull
+```
+Em caso de conflitos de códigos ou seus arquivos estejam bagunçados demais e queira codar a partir da main como está, delete sua pasta e realize o git clone novamente.
 
 ##
 
