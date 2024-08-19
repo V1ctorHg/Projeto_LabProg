@@ -1,0 +1,116 @@
+/* ---------- PÁGINA DO SOBRE ---------- */
+/*CSS RESET*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    text-decoration: none;
+    list-style-type: none;
+}
+
+:root {
+    --w: white;
+    --b: black;
+    --mainTitleFont: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    --mainSubTextFont: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+    --bgColor: #00546D;
+}
+
+/* ---------- NAV ---------- */
+.container_top {
+    background-color: var(--bgColor);
+    padding: 1em;
+
+    position: fixed;
+    width: 100%;
+}
+
+.container_top nav ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+ul li a {
+    color: var(--w);
+    font-size: 2em;
+    font-family: var(--mainTitleFont);
+}
+
+ul li .about_link {
+    font-size: 1em;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+ul li .about_link:hover {
+    font-weight: bold;
+    /* transition: font-weight .3s; */
+}
+
+
+/* ---------- HERO ---------- */
+.container_middle > #hero {
+    min-height: 90vh;
+    background-image: url("../imagens/the-climate-reality-project-hands.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#hero {
+    display: flex;
+}
+
+#hero .title {
+    width: 11em;
+    margin-left: .5em;
+
+    font-size: 4em;
+    font-family: var(--mainTitleFont);
+    color: var(--w);
+}
+
+#hero .container_links {
+    margin-top: 1em;
+    display: flex;
+}
+
+#hero .container_links .text {
+    display: flex;
+    flex-direction: column;
+
+    margin-left: 2em;
+
+    font-family: var(--mainSubTextFont);
+    color: var(--w);
+}
+
+.text > a {
+    margin-top: .5em;
+    padding: .5em;
+
+    border: .01em solid var(--w);
+    background-color: var(--w);
+    
+    color: var(--b);
+}
+
+.text > a:hover {
+    background-color: var(--b);
+    border: .01em solid var(--w);
+    
+    color: var(--w);
+
+    transition: background-color .2s, color .2s;
+}
+
+/* ---------- SOBRE ---------- */
+.container_middle > #about {
+    border: 3px solid blue;
+}

@@ -124,7 +124,7 @@ if ($EstaValido) {
 <html>
     <head>
         <title>Cadastro</title>
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="./estilos/styles.css">
         <style>.error {color: #FF0000;}</style>
     </head>
     <body>
