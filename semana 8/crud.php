@@ -117,13 +117,13 @@ if ($EstaValido) {
     }
     
 
-    header('Location: crud.php');
+    header('Location: login.php');
   }
 ?>
 
 <html>
     <head>
-        <title>CRUD</title>
+        <title>Cadastro</title>
         <link rel="stylesheet" href="styles.css">
         <style>.error {color: #FF0000;}</style>
     </head>
@@ -147,7 +147,8 @@ if ($EstaValido) {
                     Matricula: <input type="text" name="matricula" value="<?php echo !empty($resOne) ? $resOne[0]['matricula'] : $matricula; ?>">
                     
                     <br>
-                    <input type="submit" name="submit" value="<?php echo $actionVal ?>">  
+                    <input type="submit" name="submit" value="<?php echo $actionVal ?>">
+                    <a href="login.php" class="btn btn-secondary">Login</a>  
                     <input type="hidden" name="valMat" value="">
                     <input type="hidden" name="valName" value="<?php echo $valName; ?>">
                     <input type="hidden" name="valEmail" value="<?php echo $valEmail; ?>">
