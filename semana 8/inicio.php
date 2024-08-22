@@ -1,5 +1,5 @@
 <?php
-
+    session_start();
     include "connect.inc.php";
     include "estudante.class.php";
     include "curso.class.php";
@@ -7,11 +7,22 @@
 // Verifica se os dados foram passados corretamente via POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $matricula = isset($_POST['matricula']) ? htmlspecialchars($_POST['matricula']) : '';
-    $nome = isset($_POST['nome']) ? htmlspecialchars($_POST['nome']) : '';
-    $email = isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '';
-    $pontos = isset($_POST['pontos']) ? htmlspecialchars($_POST['pontos']) : '';
+ } else if ($_SERVER["REQUEST_METHOD"] == "GET") {                                  //Necessário para retorno para pagina, enviando a matriculo
+    $matricula = isset($_GET['matricula']) ? htmlspecialchars($_GET['matricula']) : '';
+}
+ else{                                  // Se os dados não foram passados, redirecionar para a página de login
+    header('Location: login.php');
+    exit;
+}
+
+if ($matricula) {                                                                                  //Pegando email e nome da matricula logada
+    $stmt = $conn->prepare("SELECT nome, email FROM estudante WHERE matricula = ?");
+    $stmt->bind_param("i", $matricula);
+    $stmt->execute();
+    $stmt->bind_result($nome, $email);
+    $stmt->fetch();
+    $stmt->close();
 } else {
-    // Se os dados não foram passados, redirecionar para a página de login
     header('Location: login.php');
     exit;
 }
@@ -19,6 +30,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $cursos = new Curso($conn);
 
 $res = $cursos->read();
+
+$_SESSION['matricula'] = $matricula;
 
 ?>
 
