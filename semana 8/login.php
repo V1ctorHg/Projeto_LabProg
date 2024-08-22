@@ -2,6 +2,7 @@
 
     include "connect.inc.php";
     include "estudante.class.php";
+    include "organizador.class.php";
 
     $matricula = 0;
     $action = 'insert';
@@ -18,7 +19,9 @@
 
     $res = $estudante->read();
     
-
+    $organizador = new Organizador($conn);
+    $rga = $organizador->read();
+    $rgaOne = $organizador->readOne('-1');
 
     $resOne = $estudante->readOne('-1');
 ?>
@@ -42,7 +45,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         $matricula = test_input($_POST["matricula"]);
         // Verifica se a matrícula existe no banco de dados
         $resOne = $estudante->readOne($matricula);
-        if (empty($resOne)) {
+        $rgaOne = $organizador->readOne($matricula);
+
+        if (empty($resOne) && empty($rgaOne)) {
             $matriErr = "* Matrícula inválida";
             $senErr = "";
             $EstaValido = false;
@@ -56,9 +61,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     } else {
         $senha = test_input($_POST["senha"]);
         
-        if ($EstaValido && $resOne[0]['senha'] != $senha) {
-            $senErr = "* Senha incorreta";
-            $EstaValido = false;
+        if ($EstaValido) {
+            if (!empty($resOne) && $resOne[0]['senha'] != $senha) {
+                $senErr = "* Senha incorreta";
+                $EstaValido = false;
+            } elseif (!empty($rgaOne) && $rgaOne[0]['senha'] != $senha) {
+                $senErr = "* Senha incorreta";
+                $EstaValido = false;
+            }
         }
     }
 }
@@ -73,14 +83,24 @@ function test_input($data) {
 
 if ($EstaValido) {
 
-    $postData = [
-        'matricula' => $resOne[0]['matricula'],
-        'nome' => $resOne[0]['nome'],
-        'email' => $resOne[0]['email'],
-        'pontos' => $resOne[0]['pontos']
-    ];
+    if (!empty($resOne)) {
+        $postData = [
+            'matricula' => $resOne[0]['matricula'],
+            'nome' => $resOne[0]['nome'],
+            'email' => $resOne[0]['email'],
+            'pontos' => $resOne[0]['pontos']
+        ];
+        $redirectPage = 'inicio.php';                       // Página do estudante
+    } elseif (!empty($rgaOne)) {
+        $postData = [
+            'matricula_organizador' => $rgaOne[0]['matricula_organizador'],
+            'nome' => $rgaOne[0]['nome'],
+            'email' => $rgaOne[0]['email']
+        ];
+        $redirectPage = 'inicioOrganizador.php';              // Página do organizador
+    }
 
-    echo "<form id='loginForm' action='inicio.php' method='post'>";
+    echo "<form id='loginForm' action='$redirectPage' method='post'>";
     foreach ($postData as $key => $value) {
         echo "<input type='hidden' name='$key' value='$value'>";
     }
