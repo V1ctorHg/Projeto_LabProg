@@ -16,15 +16,73 @@
     --mainSubTextFont: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 
     --bgColor: #00546D;
+    --fontColor1: #a1a1a1;
 }
 
-.container_top {
+body {
+    /* background-color: gray; */
+}
+
+.container_general {
+    display: flex;
+}
+
+header {
+    padding: 1em;
+    
+    min-height: 100vh;
+    width: 15em;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
     background-color: var(--bgColor);
-    padding: 1.5em;
-    color: white;
 }
 
-.container_top nav ul {
+.side_menu .menu_list {
+    font-family: var(--mainSubTextFont);
+}
+
+.side_menu .menu_list .about_link {
+    color: var(--w);
+    line-height: 3em;
+}
+
+.side_menu .menu_list .about_link:hover {
+    font-weight: 600;
+}
+
+header .container_top_info {
+    color: var(--w);
+}
+
+header .container_top_info .text_info {
+    line-height: 1em;
+    font-family: var(--mainSubTextFont);
+}
+
+header .container_top_info .username {
+    font-style: italic;
+    font-size: 1.3em;
+}
+
+header .container_top_info .user_email {
+    color: var(--fontColor1);
+    font-size: .9em;
+}
+
+header .container_top_info .user_mat {
+    margin-top: 1em;
+}
+
+header .container_top_info .text_info .bold {
+    font-style: normal;
+    font-weight: 600;
+}
+
+
+/* .container_top nav ul {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -49,7 +107,7 @@ ul li .about_link:hover {
     display: flex;
     align-items: center;
     justify-content:end
-}
+} */
 
 .infos{
     width: 640px;
@@ -65,19 +123,13 @@ table {
     border-collapse: collapse;
     text-align: left;
 }
+
 th {
     background-color: #4051b6;
     color: white;
     font-weight: bold;
 }
+
 tr:nth-child(even) {
     background-color: #f2f2f2;
-}
-
-.vertical-row{
-    width: 1.5px;
-    margin-inline: 7px;
-    height: 20px;
-    background-color: white;
-    border-radius: 15px;
 }
