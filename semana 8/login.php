@@ -112,34 +112,39 @@ if ($EstaValido) {
 
 <html>
     <head>
-        <title>Login</title>
-        <link rel="stylesheet" href="estilos/login.css">
-        <style>.error {color: #FF0000;}</style>
+    <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./estilos/login.css">
+        <!-- <style>.error {color: #FF0000;}</style> -->
+        <title>LOGIN</title>
     </head>
     <body>
         <!-- Conteúdo -->
-         <section class="container">
-            <div class="">
-                <form action="<?php echo $FormularioAcao; ?>" method="post">
-                    <input type="hidden" name="action" value="<?php echo $action; ?>">
-                    Matricula<span class="error"><?php echo $matriErr;?></span>
-                    <div class="group">
-                    <input type="text" name="matricula" value="<?php echo !empty($resOne) ? $resOne[0]['matricula'] : $matricula; ?>">
-                    </div>
-                    <br>
-                    Senha <span class="error"><?php echo $senErr;?></span>
-                    <div class="group">
-                        <input type="password" name="senha">
-                    </div>
-                    <br>
-                    
-                    <input type="submit" name="submit" value="<?php echo $actionVal ?>">  
-                    <a href="crud.php" class="cadastro">Ir para Cadastro</a>
-                    <input type="hidden" name="valMat" value="">
-                    <input type="hidden" name="valSenha" value="">
-                </form>
-            </div>            
-         </section>  
-    </body>
+        <main>
+        <a href="./sobre.html" class="home">SISCEA</a>
+            <section class="container_general">
+                <div class="container_forms">
+                    <form action="<?php echo $FormularioAcao; ?>" method="post">
+                        <input type="hidden" name="action" value="<?php echo $action; ?>">
 
+                        <label for="matricula">Matrícula</label>
+                        <span class="error"><?php echo $matriErr;?></span>
+                        <input type="text" name="matricula" id="matricula" value="<?php echo !empty($resOne) ? $resOne[0]['matricula'] : $matricula; ?>">
+                        
+                        <label for="password">Senha</label>
+                        <span class="error"><?php echo $senErr;?></span>
+                        <input type="password" name="senha" id="password">
+            
+                        <input type="submit" name="submit" value="<?php echo $actionVal ?>">
+
+                        <p class="login_text">Ainda não possui conta? <a href="crud.php" class="cadastro">Cadastre sua conta</a></p>
+                        <input type="hidden" name="valMat" value="">
+                        <input type="hidden" name="valSenha" value="">
+                    </form>
+                </div>
+            </section>
+
+            <section class="bg_grid"></section>
+        </main>
+    </body>
 </html>

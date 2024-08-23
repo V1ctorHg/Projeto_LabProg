@@ -1,91 +1,22 @@
+/* ---------- REESTRUTURAÇÃO PÁGINA DO LOGIN ---------- */
+/*CSS RESET*/
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(to right, #00556d, #00526d); /* Gradiente suave */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    color: #333;
-}
-
-.container {
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 15px;
-    width: 100%;
-    max-width: 400px;
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    backdrop-filter: blur(10px); /* Efeito de desfoque de fundo */
-}
-
-.container input[type="text"],
-.container input[type="password"] {
-    width: 100%;
-    padding: 15px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-    color: #333;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
-}
-
-.container input[type="text"]:focus,
-.container input[type="password"]:focus {
-    border-color: #0072ff;
-    outline: none;
-}
-
-.container input[type="submit"] {
-    width: 100%;
-    padding: 15px;
-    margin: 20px 0;
-    background-color: #0072ff;
-    color: white;
-    font-size: 1rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.container input[type="submit"]:hover {
-    background-color: #005bb5;
-    transform: scale(1.05);
-}
-
-.container a {
-    width: 100%;
-    color: #0072ff;
     text-decoration: none;
-    font-size: 0.9rem;
-    margin-top: 10px;
-    text-align: center;
-    display: inline-block;
-    transition: color 0.3s ease;
+    list-style-type: none;
+
+    scroll-behavior: smooth;
 }
 
-.container a:hover {
-    color: #005bb5;
-}
+:root {
+    --w: white;
+    --b: black;
+    --mainTitleFont: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    --mainSubTextFont: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    --otherTexts: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
-.container .error {
-    color: #ff4d4d;
-    margin-top: 10px;
-    font-size: 0.9rem;
+    --bgColor: #00546D;
 }
-
-.group {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-    width: 100%;
-}   
