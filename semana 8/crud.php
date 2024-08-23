@@ -119,6 +119,7 @@ if ($EstaValido) {
     <body>
         <!-- Conteúdo -->
         <main>
+            <a href="./sobre.html" class="home">SISCEA</a>
             <section class="container_general">
                 <div class="container_form">
                     <form action="<?php echo $FormularioAcao; ?>" method="post">
@@ -145,7 +146,7 @@ if ($EstaValido) {
 
                         <input type="submit" name="submit" value="<?php echo $actionVal ?>">
 
-                        <p class="login_text">Já possui uma conta?<a href="login.php" class="btn btn-secondary">Faça seu login</a></p>
+                        <p class="login_text">Já possui uma conta? <a href="login.php" class="btn btn-secondary">Faça seu login</a></p>
 
                         <input type="hidden" name="valMat" value="">
                         <input type="hidden" name="valName" value="<?php echo $valName; ?>">

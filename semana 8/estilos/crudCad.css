@@ -26,6 +26,16 @@ main {
     grid-template-columns: repeat(2, 1fr);
 }
 
+main .home {
+    margin: 1em;
+
+    position: absolute;
+    
+    font-family: var(--mainTitleFont);
+    font-size: 2em;
+    color: var(--b);
+}
+
 main .bg_grid {
     background-image: url("../imagens/others/charlesdeluvio-0bTdk1u42KY-unsplash.jpg");
     background-position: center;
@@ -50,6 +60,10 @@ form > #password, #matricula {
     margin-bottom: 1.8em;
 }
 
+form label {
+    margin-bottom: .5em;
+}
+
 form > #name, #email, #password, #matricula {
     /* background-color: red; */
     width: 20em;
@@ -60,48 +74,36 @@ form .error {
     margin-bottom: 1em;
 }
 
-/* * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;    
+form input[type="text"] {
+    border: 2px solid var(--b);
+    padding: 1em;
 }
 
-body {
-    height: 100vh;
-    background: #c6c7ff;
+form input[type="submit"] {
+    padding: 1em;
+    width: 8em;
+    margin-bottom: 1em;
+
+    background-color: var(--b);
+    border: .01em solid var(--w);
+    color: var(--w);
+
+    transition: background-color .2s, color .2s;
 }
 
-.container {
-    width: 640px;
-    height: 100px;
-    margin: auto;
-    padding: 20px;
-    display: flex;
-    flex-wrap: wrap;
+form input[type="submit"]:hover {
+    border: .01em solid var(--b);
+    background-color: var(--w);
+
+    color: var(--b);
+    cursor: pointer;
 }
 
-.formulario {
-    width: 640px;
-    height: 100px;
-    margin: auto;
-    padding: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    background-color: antiquewhite;
-    border-radius: 15px;
-    box-shadow: 10px 5px 5px black;
+.login_text {
+    font-family: var(--mainSubTextFont);
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
+.login_text .btn {
+    font-family: var(--mainTitleFont);
+    color: var(--b);
 }
-th {
-    background-color: #4051b6;
-    color: white;
-    font-weight: bold;
-}
-tr:nth-child(even) {
-    background-color: #f2f2f2;
-} */
