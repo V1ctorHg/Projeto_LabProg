@@ -7,15 +7,14 @@
 // Verifica se os dados foram passados corretamente via POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $matricula = isset($_POST['matricula']) ? htmlspecialchars($_POST['matricula']) : '';
- } else if ($_SERVER["REQUEST_METHOD"] == "GET") {                                  //Necessário para retorno para pagina, enviando a matriculo
+} else if ($_SERVER["REQUEST_METHOD"] == "GET") {   //Necessário para retorno para pagina, enviando a matricula
     $matricula = isset($_GET['matricula']) ? htmlspecialchars($_GET['matricula']) : '';
-}
- else{                                  // Se os dados não foram passados, redirecionar para a página de login
+} else {    // Se os dados não foram passados, redirecionar para a página de login
     header('Location: login.php');
     exit;
 }
 
-if ($matricula) {                                                                                  //Pegando email e nome da matricula logada
+if ($matricula) { //Pegando email e nome da matricula logada
     $stmt = $conn->prepare("SELECT nome, email FROM estudante WHERE matricula = ?");
     $stmt->bind_param("i", $matricula);
     $stmt->execute();
@@ -28,9 +27,7 @@ if ($matricula) {                                                               
 }
 
 $cursos = new Curso($conn);
-
 $res = $cursos->read();
-
 $_SESSION['matricula'] = $matricula;
 
 ?>
@@ -58,7 +55,7 @@ $_SESSION['matricula'] = $matricula;
             </ul>
         </nav>
     </header>
-    <section class="infos">                          <!-- Impressão dos cursos | Falta realizar a inscrição com o botão -->
+    <section class="infos"> <!-- Impressão dos cursos | Falta realizar a inscrição com o botão -->
     <?php if (!empty($res)): ?>
         <table>
             <tr>
@@ -82,7 +79,6 @@ $_SESSION['matricula'] = $matricula;
     <?php else: ?>
         <p>Sem cursos no momento.</p>
     <?php endif; ?>
-    </section>                                       <!-- Fim da impressão -->
-    
+    </section>  <!-- Fim da impressão -->
 </body>
 </html>

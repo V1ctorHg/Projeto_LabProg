@@ -6,10 +6,7 @@ class Evento {
     private $descricao;
     private $datahora_ini;
     private $datahora_fim;
-
     private $conn;
-
-    
 
     public function __construct($db) {
         $this->conn = $db;
@@ -46,7 +43,6 @@ class Evento {
         return $result;
     }
 
-
     public function update($post){
 
         $sql = "UPDATE evento
@@ -68,8 +64,4 @@ class Evento {
         #return $result->fetch_all(MYSQLI_ASSOC);
     #}#
 }
-
-
-
-
 ?>

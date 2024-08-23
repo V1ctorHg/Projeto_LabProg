@@ -13,7 +13,4 @@
 
     $resest = $estudante->readOne('-1');
     $resorg = $organizador->readOne('-1');
-
-    
-
 ?>

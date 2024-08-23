@@ -6,10 +6,7 @@ class Curso {
     private $datahora_ini;
     private $datahora_fim;
     private $horas;
-
     private $conn;
-
-    
 
     public function __construct($db) {
         $this->conn = $db;
@@ -46,7 +43,6 @@ class Curso {
         return $result;
     }
 
-
     public function update($post){
 
         $sql = "UPDATE curso
@@ -68,8 +64,4 @@ class Curso {
         #return $result->fetch_all(MYSQLI_ASSOC);
     #}#
 }
-
-
-
-
 ?>

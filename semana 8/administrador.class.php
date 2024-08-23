@@ -5,10 +5,7 @@ class Administrador {
     private $nome;
     private $email;
     private $senha;
-
     private $conn;
-
-    
 
     public function __construct($db) {
         $this->conn = $db;
@@ -45,9 +42,7 @@ class Administrador {
         return $result;
     }
 
-
     public function update($post){
-
         $sql = "UPDATE administrador
                 SET nome = '{$post['nome']}',
                     email = '{$post['email']}',
@@ -66,8 +61,4 @@ class Administrador {
         #return $result->fetch_all(MYSQLI_ASSOC);
     #}#
 }
-
-
-
-
 ?>

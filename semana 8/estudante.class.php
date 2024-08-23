@@ -6,10 +6,7 @@ class Estudante {
     private $email;
     private $senha;
     private $pontos;
-
     private $conn;
-
-    
 
     public function __construct($db) {
         $this->conn = $db;
@@ -46,7 +43,6 @@ class Estudante {
         return $result;
     }
 
-
     public function update($post){
 
         $sql = "UPDATE estudante
@@ -67,8 +63,4 @@ class Estudante {
         #return $result->fetch_all(MYSQLI_ASSOC);
     #}#
 }
-
-
-
-
 ?>
