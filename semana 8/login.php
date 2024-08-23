@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         $rgaOne = $organizador->readOne($matricula);
 
         if (empty($resOne) && empty($rgaOne)) {
-            $matriErr = "* Matrícula inválida";
+            $matriErr = "* Matrícula inválida!";
             $senErr = "";
             $EstaValido = false;
         }
@@ -57,16 +57,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     if (empty($_POST["senha"] && $EstaValido)) {
         $senha = "";
         $EstaValido = false;
-        $senErr = "* Senha Requerida";
+        $senErr = "* Senha requerida!";
     } else {
         $senha = test_input($_POST["senha"]);
         
         if ($EstaValido) {
             if (!empty($resOne) && $resOne[0]['senha'] != $senha) {
-                $senErr = "* Senha incorreta";
+                $senErr = "* Senha incorreta!";
                 $EstaValido = false;
             } elseif (!empty($rgaOne) && $rgaOne[0]['senha'] != $senha) {
-                $senErr = "* Senha incorreta";
+                $senErr = "* Senha incorreta!";
                 $EstaValido = false;
             }
         }
