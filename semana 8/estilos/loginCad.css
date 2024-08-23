@@ -1,4 +1,4 @@
-/* ---------- REESTRUTURAÇÃO PÁGINA DO CADASTRO ---------- */
+/* ---------- REESTRUTURAÇÃO PÁGINA DO LOGIN ---------- */
 /*CSS RESET*/
 * {
     margin: 0;
@@ -16,7 +16,8 @@
     --b: black;
     --mainTitleFont: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     --mainSubTextFont: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-
+    --otherTexts: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
     --bgColor: #00546D;
 }
 
@@ -28,7 +29,7 @@ main {
 
 main .home {
     margin: 1em;
-
+    
     position: absolute;
     
     font-family: var(--mainTitleFont);
@@ -37,7 +38,8 @@ main .home {
 }
 
 main .bg_grid {
-    background-image: url("../imagens/others/charlesdeluvio-0bTdk1u42KY-unsplash.jpg");
+    min-height: 100vh;
+    background-image: url("../imagens/others/xin-wang-NHGkfa-rDPw-unsplash.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -60,33 +62,22 @@ form > #password, #matricula {
     margin-bottom: 1.8em;
 }
 
-form label {
-    margin-bottom: .5em;
-}
-
-form > #name, #email, #password, #matricula {
-    width: 20em;
-    height: 1.6em;
-}
-
-form .error {
-    margin-bottom: 1em;
-}
-
-form input[type="text"] {
-    border: 2px solid var(--b);
-    padding: 1em;
+form input[type="text"], input[type="password"] {
+    width: 15em;
+    
+    border: 1px solid var(--b);
+    padding: .5em;
 }
 
 form input[type="submit"] {
     padding: 1em;
     width: 8em;
     margin-bottom: 1em;
-
+    
     background-color: var(--bgColor);
     border: .01em solid var(--w);
     color: var(--w);
-
+    
     transition: font-weight .2s;
 }
 
@@ -99,7 +90,7 @@ form input[type="submit"]:hover {
     font-family: var(--mainSubTextFont);
 }
 
-.login_text .btn {
+.login_text .cadastro {
     font-family: var(--mainTitleFont);
     color: var(--bgColor);
 }

@@ -1,5 +1,4 @@
 <?php 
-
     include "connect.inc.php";
     include "estudante.class.php";
     include "organizador.class.php";
@@ -9,7 +8,6 @@
     $actionVal = 'Logar';
 
     if (!empty($_GET['action'])) {
-        
         $action = $_GET['action'];
         $actionVal = 'ATUALIZAR';
         $matricula = $_GET['matricula'];
@@ -114,7 +112,7 @@ if ($EstaValido) {
     <head>
     <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./estilos/login.css">
+        <link rel="stylesheet" href="./estilos/loginCad.css">
         <!-- <style>.error {color: #FF0000;}</style> -->
         <title>LOGIN</title>
     </head>
