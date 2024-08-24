@@ -5,14 +5,21 @@
 
     session_start(); #inicia a sessão no arquivo
     
-    var_dump($_SESSION);
+    //var_dump($_SESSION);
 
-    $matricula = $_SESSION['matricula']; #captura a matricula da sessão
+    if (isset($_SESSION['matricula'])) {
+        $matricula = $_SESSION['matricula'];
+    } elseif (isset($_SESSION['matricula_organizador'])){
+        $matricula = $_SESSION['matricula_organizador'];
+    } else {
+        header("Location: login.php");
+        exit;
+    }
     $action = 'update';
     $actionVal = 'Atualizar';
 
-    $estudante = new Estudante($conn); #instancia um objeto da classe Estudante
-    $organizador = new Organizador($conn); #instancia um objeto da classe Organizador
+    $estudante = new Estudante($conn); 
+    $organizador = new Organizador($conn); 
 
     $estavalido = false;
     $organiza = false;
@@ -86,12 +93,12 @@
                 if($organiza){
                     $organizador->update($_POST);
                     $_SESSION['matricula'] = $matricula;
-                    header('Location: inicio.php');
+                    header("Location: inicioOrganizador.php?matricula_organizador=" . urlencode($matricula_organizador));
                     exit;
                 } else {
                     $estudante->update($_POST);
                     $_SESSION['matricula'] = $matricula;
-                    header('Location: inicio.php');
+                    header("Location: inicio.php?matricula=" . urlencode($matricula));
                     exit;
                 }
             }
