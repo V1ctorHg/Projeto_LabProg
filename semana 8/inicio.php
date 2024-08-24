@@ -60,31 +60,33 @@ $_SESSION['matricula'] = $matricula;
             </nav>
         </header>
         <!-- Impressão dos cursos | Falta realizar a inscrição com o botão -->
-        <section class="infos">
-            <?php if (!empty($res)): ?>
-                <table>
-                    <tr>
-                        <th>cod</th>
-                        <th>nome</th>
-                        <th>data</th>
-                        <th>hora</th>
-                    </tr>
-                    <?php
-                    foreach ($res as $r) {
-                        echo ("
-                            <tr>
-                                <td>{$r['cod_curso']}</td>
-                                <td>{$r['nome']}</td>
-                                <td>{$r['datahora_ini']}</td>
-                                <td>{$r['horas']}</td>
-                            </tr>");
-                    }
-                    ?>
-                </table>
-            <?php else: ?>
-                <p>Sem cursos no momento.</p>
-            <?php endif; ?>
-        </section>  <!-- Fim da impressão -->
+        <div class="flex_container">
+            <section class="table_info">
+                <?php if (!empty($res)): ?>
+                    <table>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome (Curso)</th>
+                            <th>Data do Evento</th>
+                            <th>Duração</th>
+                        </tr>
+                        <?php
+                        foreach ($res as $r) {
+                            echo ("
+                                <tr>
+                                    <td>{$r['cod_curso']}</td>
+                                    <td>{$r['nome']}</td>
+                                    <td>{$r['datahora_ini']}</td>
+                                    <td>{$r['horas']}</td>
+                                </tr>");
+                        }
+                        ?>
+                    </table>
+                <?php else: ?>
+                    <p class="no_courses">Você não possui cadastro em nenhum curso no momento.</p>
+                <?php endif; ?>
+            </section>  <!-- Fim da impressão -->
+        </div>
     </div>
 </body>
 </html>
