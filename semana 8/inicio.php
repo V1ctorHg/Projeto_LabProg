@@ -5,15 +5,18 @@
     include "connect.inc.php";
     include "estudante.class.php";
     include "curso.class.php";
-
 // Verifica se os dados foram passados corretamente via POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $matricula = isset($_POST['matricula']) ? htmlspecialchars($_POST['matricula']) : '';
 } else if ($_SERVER["REQUEST_METHOD"] == "GET") {   //Necessário para retorno para pagina, enviando a matricula
     $matricula = isset($_GET['matricula']) ? htmlspecialchars($_GET['matricula']) : '';
 } else {    // Se os dados não foram passados, redirecionar para a página de login
-    header('Location: login.php');
-    exit;
+    $matricula = $_SESSION['matricula'];
+    var_dump($matricula);
+    if (!$matricula) { #se não tiver matricula na sessão, redireciona para o login
+        header('Location: login.php');
+        exit;
+    }
 }
 
 if ($matricula) { //Pegando email e nome da matricula logada
@@ -54,7 +57,7 @@ $_SESSION['matricula'] = $matricula;
             <nav class="side_menu">
                 <ul class="menu_list">
                     <li><a class="about_link" href="#ranking">Ranking</a></li>
-                    <li><a class="about_link" href="#">Editar</a></li>
+                    <li><a class="about_link" href="editar.php">Editar</a></li>
                     <li><a class="about_link" href="login.php">Logout</a></li>
                 </ul>
             </nav>

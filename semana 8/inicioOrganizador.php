@@ -66,7 +66,7 @@ $eventos = [];
                         <li class="vertical-row"></li>
                         <li><a class="about_link" href="#eventos">Gerenciar Eventos</a></li>
                         <li class="vertical-row"></li>
-                        <li><a class="about_link" href="#">Editar</a></li>                        <li class="vertical-row"></li>
+                        <li><a class="about_link" href="editar.php">Editar</a></li>                        <li class="vertical-row"></li>
                         <li><a class="about_link" href="login.php">Logout</a></li>
                     </ul>
                 <li><strong>Matrícula:</strong> <?php echo $matricula; ?></a></li>
