@@ -15,7 +15,7 @@ else if (isset($_SESSION['matricula'])) {
     $matricula = $_SESSION['matricula'];
 
 } else {
-    header('Location: login.php');-
+    header('Location: login.php');
     exit;
 }
 
