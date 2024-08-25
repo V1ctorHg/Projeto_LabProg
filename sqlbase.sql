@@ -26,7 +26,7 @@ CREATE TABLE evento(
 
 
 CREATE TABLE organizador(
-    matricula_organizador INT AUTO_INCREMENT PRIMARY KEY,
+    matricula_organizador INT PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
     email VARCHAR(300) NOT NULL,
     senha VARCHAR(30) NOT NULL

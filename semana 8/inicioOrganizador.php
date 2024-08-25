@@ -10,8 +10,11 @@ session_start();
 // Verifica se os dados foram passados corretamente via POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $matricula = isset($_POST['matricula_organizador']) ? htmlspecialchars($_POST['matricula_organizador']) : '';
- } else if ($_SERVER["REQUEST_METHOD"] == "GET") {                                  //Necessário para retorno para pagina, enviando a matriculo
-    $matricula = isset($_GET['matricula_organizador']) ? htmlspecialchars($_GET['matricula_organizador']) : '';
+ }#else if ($_SERVER["REQUEST_METHOD"] == "GET") {                                  //Necessário para retorno para pagina, enviando a matriculo
+    #$matricula = isset($_GET['matricula_organizador']) ? htmlspecialchars($_GET['matricula_organizador']) : '';
+#}
+else if (isset($_SESSION['matricula_organizador'])) { //retorno para a página, enviando a matricula usando a sessão
+    $matricula = $_SESSION['matricula_organizador'];
 }
  else{                                  // Se os dados não foram passados, redirecionar para a página de login
     header('Location: login.php');
@@ -29,6 +32,8 @@ if ($matricula) {                                                               
     header('Location: login.php');
     exit;
 }
+
+$_SESSION['tipouser'] = 'organizador';
 
 $_SESSION['matricula_organizador'] = $matricula;
 
@@ -67,7 +72,7 @@ $eventos = [];
                         <li><a class="about_link" href="#eventos">Gerenciar Eventos</a></li>
                         <li class="vertical-row"></li>
                         <li><a class="about_link" href="editar.php">Editar</a></li>                        <li class="vertical-row"></li>
-                        <li><a class="about_link" href="login.php">Logout</a></li>
+                        <li><a class="about_link" href="logout.php">Logout</a></li>
                     </ul>
                 <li><strong>Matrícula:</strong> <?php echo $matricula; ?></a></li>
             </ul>

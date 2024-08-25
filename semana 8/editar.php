@@ -8,7 +8,14 @@
     // Retirado o var_dump porque ficava no top da tela me atrapalhando
     // var_dump($_SESSION);
 
-    $matricula = $_SESSION['matricula']; #captura a matricula da sessão
+    if ($_SESSION['tipouser'] == 'estudante') {
+        $matricula = $_SESSION['matricula'];
+    } elseif ($_SESSION['tipouser'] == 'organizador') {
+        $matricula = $_SESSION['matricula_organizador'];
+    } else {
+        header("Location: login.php");
+        exit;
+    }
     $action = 'update';
     $actionVal = 'Atualizar';
 
@@ -26,7 +33,11 @@
 
     $res = $resnum[0]; #captura o primeiro elemento do array
     $senhaerr = $emailerr = $nomeerr = "";
-    $matricula = $res["matricula"]; 
+    if($organiza){
+        $matricula = $res["matricula_organizador"];
+    }else{
+        $matricula = $res["matricula"];
+    }
     $nome = $res['nome']; 
     $senha = $res['senha'];
     $email = $res['email'];
@@ -38,11 +49,12 @@
         return $data;
     }
 
+      echo $organiza;
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         $estavalido = True;
 
-        $matricula = $_SESSION['matricula']; #captura a matricula da sessão
+        #$matricula = $_SESSION['matricula']; #captura a matricula da sessão
         
         if (empty($_POST["nome"])) {
             $nameErr = "Um nome é necessário!";
@@ -83,21 +95,22 @@
             $valsenha = "CERTO";
         }
 
-        var_dump($_SESSION['matricula']);
-        if($estavalido) {
-            if($organiza) {
-                $organizador->update($_POST);
-                $_SESSION['matricula'] = $matricula;
-                header('Location: inicio.php');
-                exit;
-            } else {
-                $estudante->update($_POST);
-                $_SESSION['matricula'] = $matricula;
-                header('Location: inicio.php');
-                exit;
+            if($estavalido){
+                if($organiza){
+                    $organizador->update($_POST);
+                    $_SESSION['matricula_organizador'] = $matricula;
+                    #header("Location: inicioOrganizador.php?matricula_organizador=" . urlencode($matricula));
+                    header("Location: inicioOrganizador.php");
+                    exit;
+                } else {
+                    $estudante->update($_POST);
+                    $_SESSION['matricula'] = $matricula;
+                    #header("Location: inicio.php?matricula=" . urlencode($matricula));
+                    header("Location: inicio.php");
+                    exit;
+                }
             }
-        }
-    }   
+    }
 ?>
 
 <html>
@@ -116,7 +129,12 @@
             
                 <nav class="side_menu">
                     <ul class="menu_list">
-                        <li><a class="about_link" href="inicio.php">Voltar</a></li>
+                        <?php if($organiza){
+                            echo '<li><a class="about_link" href="inicioOrganizador.php">Voltar</a></li>';
+                        }else{
+                            echo '<li><a class="about_link" href="inicio.php">Voltar</a></li>';
+                        }
+                        ?>
                     </ul>
                 </nav>
             </header>
@@ -127,7 +145,8 @@
                     <input type="hidden" name="action" value="<?php echo $action; ?>">
 
                     <label for="matricula">Matrícula:</label>
-                    <input type="text" name="matricula" id="matricula" value="<?php echo $matricula; ?>" readonly>
+                    <input type="text" name="matricula" value="<?php echo $matricula; ?>" readonly>
+                    <input type="hidden" name="matricula_organizador" value="<?php echo $matricula; ?>">
 
                     <label for="nome">Nome:</label>
                     <input type="text" name="nome" id="nome" value="<?php echo $nome; ?>" required>

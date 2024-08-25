@@ -15,8 +15,8 @@ class Organizador {
     }
 
     public function create($post) {
-        $sql = "INSERT INTO organizador (nome, email, senha) VALUES
-        ('{$post['nome']}', '{$post['email']}', '{$post['senha']}')";
+        $sql = "INSERT INTO organizador (matricula_organizador, nome, email, senha) VALUES
+        ('{$post['matricula']}','{$post['nome']}', '{$post['email']}', '{$post['senha']}')";
         print($sql);
         if ($this->conn->query($sql) === TRUE) {
             return true;
@@ -70,4 +70,3 @@ class Organizador {
 
 
 
-?>

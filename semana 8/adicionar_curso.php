@@ -3,6 +3,8 @@ session_start();
 
 include "connect.inc.php";
 
+$matricula_organizador = $_SESSION['matricula_organizador'];
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome_curso = htmlspecialchars($_POST['nome_curso']);
     $data_inicio_curso = htmlspecialchars($_POST['data_inicio_curso']);
@@ -27,7 +29,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
     $conn->close();
 
+    var_dump($_SESSION);
     // Redireciona de volta para a página de início do organizador
-    header("Location: inicioOrganizador.php?matricula_organizador=" . urlencode($matricula_organizador));
+    $_SESSION['matricula_organizador'] = $matricula_organizador;
+
+    #header("Location: inicioOrganizador.php?matricula_organizador=" . urlencode($matricula_organizador));
+    header("Location: inicioOrganizador.php");
     exit;
 }
