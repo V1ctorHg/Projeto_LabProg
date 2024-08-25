@@ -67,7 +67,7 @@ $eventos = [];
             <ul>
                 <li><h1>Bem-vindo, <?php echo $nome; ?>!</h1></li>
                     <ul class="selections">
-                        <li><a class="about_link" href="#ranking">Ranking</a></li>
+                        <li><a class="about_link" href="ranking.php">Ranking</a></li>
                         <li class="vertical-row"></li>
                         <li><a class="about_link" href="#eventos">Gerenciar Eventos</a></li>
                         <li class="vertical-row"></li>

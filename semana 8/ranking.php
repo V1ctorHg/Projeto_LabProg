@@ -4,8 +4,12 @@
 
     session_start();
 
-    if(isset ($_SESSION['matricula'])){
-        $matricula = $_SESSION['matricula'];
+    if(isset ($_SESSION['matricula']) or isset ($_SESSION['matricula_organizador'])){
+        if($_SESSION['tipouser'] == 'estudante'){
+            $matricula = $_SESSION['matricula'];
+        } elseif ($_SESSION['tipouser'] == 'organizador'){
+            $matricula = $_SESSION['matricula_organizador'];
+        }   
     } else {
         header('Location: login.php');
         exit;
@@ -28,7 +32,15 @@
         <header>
             <nav>
                 <ul>
-                    <li><a href="inicio.php">Voltar</a></li>
+                    <?php
+                        if($_SESSION['tipouser'] == 'estudante'){
+                            echo "<li><a href='inicio.php'>Voltar</a></li>";
+                        } elseif ($_SESSION['tipouser'] == 'organizador'){
+                            echo "<li><a href='inicioOrganizador.php'>Voltar</a></li>";
+                        }elseif ($_SESSION['tipouser'] == 'administrador'){
+                            echo "<li><a href='inicioAdministrador.php'>Voltar</a></li>";
+                        }
+                        ?>
                 </ul>
             </nav>
         </header>

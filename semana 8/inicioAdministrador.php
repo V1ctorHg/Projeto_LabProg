@@ -59,7 +59,7 @@ $_SESSION['matricula'] = $matricula;
                 <ul class="menu_list">
                     <li><a class="about_link" href="rela_estudante.php">Relatório Estudante</a></li>
                     <li><a class="about_link" href="rela_evento.php">Relatório Evento</a></li>
-                    <li><a class="about_link" href="#ranking">Ranking</a></li>
+                    <li><a class="about_link" href="ranking.php">Ranking</a></li>
                     
                     <li><a class="about_link" href="logout.php">Logout</a></li>
                 </ul>
