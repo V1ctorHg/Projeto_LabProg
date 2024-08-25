@@ -5,15 +5,15 @@
     include "connect.inc.php";
     include "estudante.class.php";
     include "curso.class.php";
-// Verifica se os dados foram passados corretamente via POST
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $matricula = isset($_POST['matricula']) ? htmlspecialchars($_POST['matricula']) : '';
-} else if ($_SERVER["REQUEST_METHOD"] == "GET") {   //Necessário para retorno para pagina, enviando a matricula
+} else if ($_SERVER["REQUEST_METHOD"] == "GET") { 
     $matricula = isset($_GET['matricula']) ? htmlspecialchars($_GET['matricula']) : '';
-} else {    // Se os dados não foram passados, redirecionar para a página de login
+} else {  
     $matricula = $_SESSION['matricula'];
     var_dump($matricula);
-    if (!$matricula) { #se não tiver matricula na sessão, redireciona para o login
+    if (!$matricula) {
         header('Location: login.php');
         exit;
     }
@@ -72,23 +72,56 @@ $_SESSION['matricula'] = $matricula;
                             <th>Nome (Curso)</th>
                             <th>Data do Evento</th>
                             <th>Duração</th>
+                            <th>Inscrever-se</th>
                         </tr>
                         <?php
                         foreach ($res as $r) {
+                            // Verifica se o estudante já está inscrito no curso
+                            $stmt = $conn->prepare("SELECT 1 FROM inscricoes WHERE mat_estudante = ? AND cod_curso = ?");
+                            $stmt->bind_param("ii", $matricula, $r['cod_curso']);
+                            $stmt->execute();
+                            $stmt->store_result();
+                            $isMatriculado = $stmt->num_rows > 0;
+                            $stmt->close();
+
+                            // Verifica se há conflito de datas
+                            $stmt = $conn->prepare("SELECT 1 FROM inscricoes i JOIN curso c ON i.cod_curso = c.cod_curso WHERE i.mat_estudante = ? AND c.datahora_ini = ?");
+                            $stmt->bind_param("is", $matricula, $r['datahora_ini']);
+                            $stmt->execute();
+                            $stmt->store_result();
+                            $hasDateConflict = $stmt->num_rows > 0;
+                            $stmt->close();
+
                             echo ("
                                 <tr>
                                     <td>{$r['cod_curso']}</td>
                                     <td>{$r['nome']}</td>
                                     <td>{$r['datahora_ini']}</td>
                                     <td>{$r['horas']}</td>
-                                </tr>");
+                                    <td>");
+                            if ($isMatriculado) {
+                                echo "<form action='inscricao.php' method='post'>
+                                        <input type='hidden' name='cod_curso' value='{$r['cod_curso']}'>
+                                        <input type='hidden' name='matricula' value='{$matricula}'>
+                                        <button type='submit' name='desinscrever'>Desinscrever-se</button>
+                                      </form>";
+                            } elseif ($hasDateConflict) {
+                                echo "<button disabled>Conflito de Data</button>";
+                            } else {
+                                echo "<form action='inscricao.php' method='post'>
+                                        <input type='hidden' name='cod_curso' value='{$r['cod_curso']}'>
+                                        <input type='hidden' name='matricula' value='{$matricula}'>
+                                        <button type='submit' name='inscrever'>Inscrever-se</button>
+                                      </form>";
+                            }
+                            echo "</td></tr>";
                         }
                         ?>
                     </table>
                 <?php else: ?>
-                    <p class="no_courses">Você não possui cadastro em nenhum curso no momento.</p>
+                    <p class="no_courses">Não há cursos no momento</p>
                 <?php endif; ?>
-            </section>  <!-- Fim da impressão -->
+            </section>
         </div>
     </div>
 </body>
