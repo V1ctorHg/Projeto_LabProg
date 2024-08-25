@@ -31,7 +31,7 @@ class Evento {
     }
 
     public function readOne($cod_evento) {
-        $sql = "SELECT cod_evento, nome, descricao, DATE_FORMAT(datahora_ini, '%d/%m/%Y %H:%i:%s') AS datahora_ini, DATE_FORMAT(datahora_fim, '%d/%m/%Y %H:%i:%s') AS datahora_fim
+        $sql = "SELECT *
         FROM evento WHERE cod_evento = $cod_evento";
         $result = $this->conn->query($sql);
         return $result->fetch_all(MYSQLI_ASSOC);
@@ -45,18 +45,38 @@ class Evento {
     }
 
     public function update($post){
-
-        $sql = "UPDATE evento
-                SET nome = '{$post['nome']}',
-                    descricao = '{$post['descricao']}',
-                    datahora_ini = '{$post['datahora_ini']}',
-                    datahora_fim = '{$post['datahora_fim']}'
-                WHERE cod_evento = {$post['cod_evento']}";
-
-        $result = $this->conn->query($sql);
-
-        return $result;
+    try {
+        // Prepara a consulta SQL
+        $stmt = $this->conn->prepare("UPDATE evento
+                                       SET nome = ?, 
+                                           descricao = ?, 
+                                           datahora_ini = ?, 
+                                           datahora_fim = ?
+                                       WHERE cod_evento = ?");
+        
+        // Vincula os parâmetros
+        $stmt->bind_param("ssssi", 
+                          $post['nome'], 
+                          $post['descricao'], 
+                          $post['datahora_ini'], 
+                          $post['datahora_fim'], 
+                          $post['cod_evento']);
+        
+        // Executa a consulta
+        $stmt->execute();
+        
+        // Verifica se a consulta foi bem-sucedida
+        if ($stmt->affected_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (Exception $e) {
+        // Captura e retorna a mensagem de erro
+        return "Erro ao atualizar o evento: " . $e->getMessage();
     }
+}
+
 
     
 }

@@ -23,6 +23,243 @@
 
     $resevento = $evento->read();
     $rescurso = $curso->read();
-
-    
 ?>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Gerenciar Eventos</title>
+    </head>
+
+    </head>
+<body>
+    <div>
+        <h1>Gerenciar Eventos e Cursos</h1>
+        <?php if($_SESSION['tipouser'] == 'organizador'){
+            echo"<a href='inicioOrganizador.php'>Voltar</a></p>";
+        }elseif($_SESSION['tipouser'] == 'administrador'){
+            echo"<a href='inicioAdministrador.php'>Voltar</a></p>";        
+        } 
+        ?>
+    </div>
+    <section class="infos">
+        <?php if (!empty($resevento)): ?>
+            <table>
+                <tr>
+                    <th>Cod</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Data_início</th>
+                    <th>Data_fim</th>
+                    <th>Ações</th>
+                </tr>
+                <?php foreach ($resevento as $r): ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($r['cod_evento']); ?></td>
+                        <td><?php echo htmlspecialchars($r['nome']); ?></td>
+                        <td><?php echo htmlspecialchars($r['descricao']); ?></td>
+                        <td><?php echo htmlspecialchars($r['datahora_ini']); ?></td>
+                        <td><?php echo htmlspecialchars($r['datahora_fim']); ?></td>
+                        <td>
+                            <button class='event-open-modal' data-evento-id='<?php echo htmlspecialchars($r['cod_evento']); ?>'> Editar Evento</button>
+                        </td>
+                        <td>
+                            <button class='event-open-modal' data-evento-id='<?php echo htmlspecialchars($r['cod_evento']);?>'> Remover Evento</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">
+                            <table border="1" width="100%">
+                                <tr>
+                                    <th>Nome do Curso</th>
+                                    <th>Data de Início</th>
+                                    <th>Duração</th>
+                                </tr>
+                                <?php
+                                $stmt = $conn->prepare("SELECT curso.cod_curso, nome, DATE_FORMAT(datahora_ini, '%d/%m/%Y %H:%i:%s') AS datahora_ini, horas FROM curso JOIN evento_curso ON curso.cod_curso = evento_curso.cod_curso WHERE evento_curso.cod_evento = ?");
+                                $stmt->bind_param("i", $r['cod_evento']);
+                                $stmt->execute();
+                                $result = $stmt->get_result();
+                                
+                                while ($curso = $result->fetch_assoc()): ?>
+                                    <tr>
+                                        <td><?php echo htmlspecialchars($curso['nome']); ?></td>
+                                        <td><?php echo htmlspecialchars($curso['datahora_ini']); ?></td>
+                                        <td><?php echo htmlspecialchars($curso['horas']); ?></td>
+                                        <td>
+                                            <button class='curso-open-modal' data-curso-id='<?php echo htmlspecialchars($curso['cod_curso']);?>'> Editar Curso</button>
+                                        </td>
+                                        <td>
+                                            <button class='curso-open-modal' data-curso-id='<?php echo htmlspecialchars($curso['cod_curso']);?>'> Remover Curso</button>
+                                        </td>
+                                    </tr>
+                                <?php endwhile; ?>
+                                <?php $stmt->close(); ?>
+                            </table>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
+        <?php else: ?>
+            <p>Sem Eventos no momento.</p>
+        <?php endif; ?>
+    </section> 
+
+ <!-- #edicao de evento -->
+    <div id="editaeventomodal" class="editamodal">               
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Editar Evento</h2>
+            <form id="editaeventoform" action="eventoud.php" method="post">
+                <input type="hidden" id="action" name="action" value="update">
+                <input type="hidden" id="modal_evento_id" name="cod_evento">
+                <input type="hidden" name="matricula_organizador" value="<?php echo htmlspecialchars($matricula); ?>">
+                
+                <label for="id_evento">ID do Evento:</label><br>
+                <input type="text" id="id_evento" name="id_evento" readonly><br><br>
+
+                <label for="nome_evento">Nome do Evento:</label><br>
+                <input type="text" id="nome_evento" name="nome" required><br><br>
+
+                <label for="descricao_evento">Descrição do Evento:</label><br>
+                <input type="text" id="descricao_evento" name="descricao" required><br><br>
+                
+                <label for="data_inicio_evento">Data de Início:</label><br>
+                <input type="datetime-local" id="data_inicio_evento" name="datahora_ini" required><br><br>
+
+                <label for="data_inicio_evento">Data de Fim:</label><br>
+                <input type="datetime-local" id="data_fim_evento" name="datahora_fim" required><br><br>
+                       
+                <input type="submit" value="Atualizar Evento">
+            </form>
+        </div>
+    </div>
+
+    <!-- #edicao de curso -->
+    <div id="editacursomodal" class="editamodal">               
+        <div class="modal-content">
+            <span class="closec">&times;</span>
+            <h2>Editar Curso</h2>
+            <form id="editacursoform" action="cursoud.php" method="post">
+                <input type="hidden" id="action" name="action" value="update">
+                <input type="hidden" id="modal_curso_id" name="cod_curso">
+                <input type="hidden" name="matricula_organizador" value="<?php echo htmlspecialchars($matricula); ?>">
+                
+                <label for="id_evento">ID do Curso:</label><br>
+                <input type="text" id="id_curso" name="id_curso" readonly><br><br>
+
+                <label for="nome_evento">Nome do Curso:</label><br>
+                <input type="text" id="nome_curso" name="nome" required><br><br>
+                
+                <label for="data_inicio_curso">Data de Início:</label><br>
+                <input type="datetime-local" id="data_inicio_curso" name="datahora_ini" required><br><br>
+
+                <label for="data_inicio_curso">Data de Fim:</label><br>
+                <input type="datetime-local" id="data_fim_curso" name="datahora_fim" required><br><br>
+
+                <label for="horas_curso">Horas do Curso:</label><br>
+                <input type="text" id="horas_curso" name="horas" required><br><br>
+                       
+                <input type="submit" value="Atualizar Curso">
+            </form>
+        </div>
+    </div>
+    
+
+    <!-- #javascript -->
+
+    <script>
+        var modal = document.getElementById("editaeventomodal");
+        var btns = document.querySelectorAll(".event-open-modal");
+        var span = document.getElementsByClassName("close")[0];
+
+        btns.forEach(function(btn) {
+            btn.onclick = function() {
+                var eventoId = this.getAttribute("data-evento-id");
+                document.getElementById("modal_evento_id").value = eventoId;
+
+
+                // Requisição AJAX para obter os dados do evento
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "getevento.php", true);
+                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhr.onload = function(){
+                if (xhr.status == 200){
+                    var evento = JSON.parse(xhr.responseText);
+                    console.log(evento); // Adicione esta linha para depuração
+                    document.getElementById("id_evento").value = evento.cod_evento;
+                    document.getElementById("nome_evento").value = evento.nome;
+                    document.getElementById("descricao_evento").value = evento.descricao;
+                    document.getElementById("data_inicio_evento").value = evento.datahora_ini;
+                    document.getElementById("data_fim_evento").value = evento.datahora_fim;    
+            } else {
+                console.error("Erro na requisição: ", xhr.statusText);
+            }
+                };
+    
+                xhr.send("cod_evento=" + encodeURIComponent(eventoId));
+
+                modal.style.display = "block";
+            }
+        });
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+<script>
+        var modal = document.getElementById("editacursomodal");
+        var btns = document.querySelectorAll(".curso-open-modal");
+        var span = document.getElementsByClassName("closec")[0];
+
+        btns.forEach(function(btn) {
+            btn.onclick = function() {
+                var cursoId = this.getAttribute("data-curso-id");
+                document.getElementById("modal_curso_id").value = cursoId;
+                console.log(cursoId);
+
+                // Requisição AJAX para obter os dados do evento
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "getcurso.php", true);
+                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhr.onload = function(){
+                if (xhr.status == 200){
+                    console.log(xhr.responseText);
+                    var curso = JSON.parse(xhr.responseText);
+                    console.log(curso); // Adicione esta linha para depuração
+                    document.getElementById("id_curso").value = curso.cod_curso;
+                    document.getElementById("nome_curso").value = curso.nome;
+                    document.getElementById("data_inicio_curso").value = curso.datahora_ini;
+                    document.getElementById("data_fim_curso").value = curso.datahora_fim;    
+                    document.getElementById("horas_curso").value = curso.horas;
+            } else {
+                console.error("Erro na requisição: ", xhr.statusText);
+            }
+                };
+    
+                xhr.send("cod_curso=" + encodeURIComponent(cursoId));
+
+                modal.style.display = "block";
+            }
+        });
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
