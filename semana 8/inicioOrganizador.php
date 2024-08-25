@@ -69,7 +69,7 @@ $eventos = [];
                     <ul class="selections">
                         <li><a class="about_link" href="ranking.php">Ranking</a></li>
                         <li class="vertical-row"></li>
-                        <li><a class="about_link" href="#eventos">Gerenciar Eventos</a></li>
+                        <li><a class="about_link" href="gerenciareventos.php">Gerenciar Eventos</a></li>
                         <li class="vertical-row"></li>
                         <li><a class="about_link" href="editar.php">Editar</a></li>                        <li class="vertical-row"></li>
                         <li><a class="about_link" href="logout.php">Logout</a></li>
@@ -129,7 +129,7 @@ $eventos = [];
                                     <th>Duração</th>
                                 </tr>
                                 <?php
-                                $stmt = $conn->prepare("SELECT nome, datahora_ini, horas FROM curso JOIN evento_curso ON curso.cod_curso = evento_curso.cod_curso WHERE evento_curso.cod_evento = ?");
+                                $stmt = $conn->prepare("SELECT nome, DATE_FORMAT(datahora_ini, '%d/%m/%Y %H:%i:%s') AS datahora_ini, horas FROM curso JOIN evento_curso ON curso.cod_curso = evento_curso.cod_curso WHERE evento_curso.cod_evento = ?");
                                 $stmt->bind_param("i", $r['cod_evento']);
                                 $stmt->execute();
                                 $result = $stmt->get_result();

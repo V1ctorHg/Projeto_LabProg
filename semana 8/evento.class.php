@@ -25,13 +25,14 @@ class Evento {
     }
 
     public function read() {
-        $sql = "SELECT * FROM evento";
+        $sql = "SELECT cod_evento, nome, descricao, DATE_FORMAT(datahora_ini, '%d/%m/%Y %H:%i:%s') AS datahora_ini, DATE_FORMAT(datahora_fim, '%d/%m/%Y %H:%i:%s') AS datahora_fim FROM evento";
         $result = $this->conn->query($sql);
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     public function readOne($cod_evento) {
-        $sql = "SELECT * FROM evento WHERE cod_evento = $cod_evento";
+        $sql = "SELECT cod_evento, nome, descricao, DATE_FORMAT(datahora_ini, '%d/%m/%Y %H:%i:%s') AS datahora_ini, DATE_FORMAT(datahora_fim, '%d/%m/%Y %H:%i:%s') AS datahora_fim
+        FROM evento WHERE cod_evento = $cod_evento";
         $result = $this->conn->query($sql);
         return $result->fetch_all(MYSQLI_ASSOC);
     }
