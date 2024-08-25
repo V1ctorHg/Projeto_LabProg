@@ -22,6 +22,7 @@
         $resnum = $organizador->readOne($matricula); #chama o método readOne da classe Organizador se não for um estudante
         $organiza = true;
     }
+
     $res = $resnum[0]; #captura o primeiro elemento do array
     $senhaerr = $emailerr = $nomeerr = "";
     $matricula = $res["matricula"]; 
@@ -34,7 +35,7 @@
         $data = stripslashes($data);
         $data = htmlspecialchars($data);
         return $data;
-      }
+    }
 
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
@@ -46,7 +47,7 @@
             $nameErr = "Um nome é necessário!";
             $nome = $res['nome'];
             $estavalido = False;
-          } else {
+        } else {
             $nome = test_input($_POST["nome"]);
             if (!preg_match("/^[\p{L}\'\- ]+$/u", $nome)) {
                 $valnome = "ERRADO";
@@ -54,13 +55,13 @@
             } else {
                 $valnome = "CERTO";
             }
-          }
+        }
           
-          if (empty($_POST["email"])) {
+        if (empty($_POST["email"])) {
             $emailerr = "Um e-mail é necessário!";
             $email = $res['email'];
             $estavalido = False;
-          } else {
+        } else {
             $email = test_input($_POST["email"]);
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $emailerr = "Formato de e-mail inválido!";
@@ -69,33 +70,33 @@
             } else {
                 $valemail = "CERTO";
             }
-          }
+        }
           
-          if (empty($_POST["senha"])) {
+        if (empty($_POST["senha"])) {
             $senha = $res['senha'];
             $estavalido = False;
             $senErr = "Senha necessária!";
             $valsenha = "ERRADO";
-          } else {
+        } else {
             $senha = test_input($_POST["senha"]);
             $valsenha = "CERTO";
-          }
+        }
 
-          var_dump($_SESSION['matricula']);
-            if($estavalido){
-                if($organiza){
-                    $organizador->update($_POST);
-                    $_SESSION['matricula'] = $matricula;
-                    header('Location: inicio.php');
-                    exit;
-                } else {
-                    $estudante->update($_POST);
-                    $_SESSION['matricula'] = $matricula;
-                    header('Location: inicio.php');
-                    exit;
-                }
+        var_dump($_SESSION['matricula']);
+        if($estavalido) {
+            if($organiza) {
+                $organizador->update($_POST);
+                $_SESSION['matricula'] = $matricula;
+                header('Location: inicio.php');
+                exit;
+            } else {
+                $estudante->update($_POST);
+                $_SESSION['matricula'] = $matricula;
+                header('Location: inicio.php');
+                exit;
             }
-    }
+        }
+    }   
 ?>
 
 <html>
@@ -108,7 +109,7 @@
     <body>
         <section class="container_general">
             <div class="container_forms">
-                <form method = "post">
+                <form method="post">
                     <h2>EDITAR DADOS PESSOAIS</h2>
                     <input type="hidden" name="action" value="<?php echo $action; ?>">
 
@@ -134,7 +135,6 @@
                     <input type="hidden" name="valSenha" value="<?php echo $valsenha; ?>">
                 </form>
             </div>
-
         </section>
     </body>
 </html>
