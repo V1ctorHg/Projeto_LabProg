@@ -48,6 +48,7 @@ $_SESSION['matricula'] = $matricula;
     <link rel="stylesheet" href="./estilos/inicio.css">
     <title>INÍCIO — <?php echo $nome; ?></title>
 </head>
+
 <body>
     <div class="container_general">
         <header>
@@ -59,13 +60,13 @@ $_SESSION['matricula'] = $matricula;
         
             <nav class="side_menu">
                 <ul class="menu_list">
-                    
                     <li><a class="about_link" href="ranking.php">Ranking</a></li>
                     <li><a class="about_link" href="editar.php">Editar</a></li>
                     <li><a class="about_link" href="logout.php">Logout</a></li>
                 </ul>
             </nav>
         </header>
+        
         <!-- Impressão dos cursos | Falta realizar a inscrição com o botão -->
         <div class="flex_container">
             <section class="table_info">

@@ -144,19 +144,19 @@
                     <h2 class="title">Editar Dados</h2>
                     <input type="hidden" name="action" value="<?php echo $action; ?>">
 
-                    <label for="matricula">Matrícula:</label>
-                    <input type="text" name="matricula" value="<?php echo $matricula; ?>" readonly>
-                    <input type="hidden" name="matricula_organizador" value="<?php echo $matricula; ?>">
+                    <label for="matricula">Matrícula</label>
+                    <input type="text" name="matricula" id="matricula" value="<?php echo $matricula; ?>" readonly>
+                    <input type="hidden" name="matricula_organizador" id="matricula_organizador" value="<?php echo $matricula; ?>">
 
-                    <label for="nome">Nome:</label>
+                    <label for="nome">Nome</label>
                     <input type="text" name="nome" id="nome" value="<?php echo $nome; ?>" required>
                     <span class="error">* <?php echo $nomeerr;?></span>
 
-                    <label for="email">E-mail:</label>
+                    <label for="email">E-mail</label>
                     <input type="email" name="email" id="email" value="<?php echo $email; ?>" required>
                     <span class="error">* <?php echo $emailerr;?></span>
 
-                    <label for="senha">Senha:</label>
+                    <label for="senha">Senha</label>
                     <input type="text" name="senha" id="senha" value="<?php echo $senha; ?>" required>
                     <span class="error">* <?php echo $senhaerr;?></span>
 

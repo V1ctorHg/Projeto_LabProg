@@ -20,10 +20,6 @@
     --fontColor2: #e4e4e4;
 }
 
-body {
-    /* background-color: gray; */
-}
-
 .container_general {
     display: flex;
 }
@@ -56,7 +52,6 @@ header {
 
 .container_forms {
     min-width: 85vw;
-    /* border: 3px solid red; */
 }
 
 .container_forms form {
@@ -82,17 +77,16 @@ form label {
 form input[type="text"], input[type="email"] {
     border: 2px solid var(--b);
     padding: 1em;
+    width: 20em;
 }
 
-form > #nome, #email, #senha, #matricula {
-    width: 20em;
-    height: 1.6em;
+form > #matricula {
+    margin-bottom: 1.5em;
 }
 
 form input[type="submit"] {
-    padding: 1em;
     width: 8em;
-    margin-bottom: 1em;
+    padding: 1em;
     
     background-color: var(--bgColor);
     border: .01em solid var(--w);
