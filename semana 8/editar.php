@@ -49,7 +49,6 @@
         return $data;
     }
 
-      echo $organiza;
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         $estavalido = True;
