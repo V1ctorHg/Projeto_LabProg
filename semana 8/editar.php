@@ -5,7 +5,8 @@
 
     session_start(); #inicia a sessão no arquivo
     
-    var_dump($_SESSION);
+    // Retirado o var_dump porque ficava no top da tela me atrapalhando
+    // var_dump($_SESSION);
 
     $matricula = $_SESSION['matricula']; #captura a matricula da sessão
     $action = 'update';
@@ -103,29 +104,41 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./estilos/loginCad.css">
-        <title>EDITAR DADOS PESSOAIS</title>
+        <link rel="stylesheet" href="./estilos/inicioEditar.css">
+        <title>EDITAR</title>
     </head>
     <body>
         <section class="container_general">
+            <header>
+                <div class="container_top_info">
+                    <div class="empty_container"></div>
+                </div>
+            
+                <nav class="side_menu">
+                    <ul class="menu_list">
+                        <li><a class="about_link" href="inicio.php">Voltar</a></li>
+                    </ul>
+                </nav>
+            </header>
+
             <div class="container_forms">
                 <form method="post">
-                    <h2>EDITAR DADOS PESSOAIS</h2>
+                    <h2 class="title">Editar Dados</h2>
                     <input type="hidden" name="action" value="<?php echo $action; ?>">
 
                     <label for="matricula">Matrícula:</label>
-                    <input type="text" name="matricula" value="<?php echo $matricula; ?>" readonly>
+                    <input type="text" name="matricula" id="matricula" value="<?php echo $matricula; ?>" readonly>
 
                     <label for="nome">Nome:</label>
-                    <input type="text" name="nome" value="<?php echo $nome; ?>" required>
+                    <input type="text" name="nome" id="nome" value="<?php echo $nome; ?>" required>
                     <span class="error">* <?php echo $nomeerr;?></span>
 
                     <label for="email">E-mail:</label>
-                    <input type="email" name="email" value="<?php echo $email; ?>" required>
+                    <input type="email" name="email" id="email" value="<?php echo $email; ?>" required>
                     <span class="error">* <?php echo $emailerr;?></span>
 
                     <label for="senha">Senha:</label>
-                    <input type="text" name="senha" value="<?php echo $senha; ?>" required>
+                    <input type="text" name="senha" id="senha" value="<?php echo $senha; ?>" required>
                     <span class="error">* <?php echo $senhaerr;?></span>
 
                     <input type="submit" name="submit" value="<?php echo $actionVal; ?>">

@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+    text-decoration: none;
+    list-style-type: none;
+
+    scroll-behavior: smooth;
+}
+
+:root {
+    --w: white;
+    --b: black;
+    --mainTitleFont: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    --mainSubTextFont: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+    --bgColor: #00546D;
+    --fontColor1: #a1a1a1;
+    --fontColor2: #e4e4e4;
+}
+
+body {
+    /* background-color: gray; */
+}
+
+.container_general {
+    display: flex;
+}
+
+header {
+    padding: 1em;
+    
+    min-height: 100vh;
+    min-width: 15vw;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    background-color: var(--bgColor);
+}
+
+.side_menu .menu_list {
+    font-family: var(--mainSubTextFont);
+}
+
+.side_menu .menu_list .about_link {
+    color: var(--w);
+    line-height: 3em;
+}
+
+.side_menu .menu_list .about_link:hover {
+    font-weight: 600;
+}
+
+.container_forms {
+    min-width: 85vw;
+    /* border: 3px solid red; */
+}
+
+.container_forms form {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container_forms .title {
+    font-family: var(--mainTitleFont);
+    font-size: 3em;
+    margin-bottom: 1em;
+}
+
+form label {
+    font-family: var(--mainTitleFont);
+    font-size: 1.1em;
+}
+
+form input[type="text"], input[type="email"] {
+    border: 2px solid var(--b);
+    padding: 1em;
+}
+
+form > #nome, #email, #senha, #matricula {
+    width: 20em;
+    height: 1.6em;
+}
+
+form input[type="submit"] {
+    padding: 1em;
+    width: 8em;
+    margin-bottom: 1em;
+    
+    background-color: var(--bgColor);
+    border: .01em solid var(--w);
+    color: var(--w);
+    
+    transition: font-weight .2s;
+}
+
+form input[type="submit"]:hover {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+form .error {
+    margin-bottom: 1em;
+}
