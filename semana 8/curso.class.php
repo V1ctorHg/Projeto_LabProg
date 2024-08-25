@@ -25,7 +25,8 @@ class Curso {
     }
 
     public function read() {
-        $sql = "SELECT * FROM curso";
+        $sql = "SELECT cod_curso, nome, DATE_FORMAT(datahora_ini, '%d/%m/%Y %H:%i:%s') AS datahora_ini, DATE_FORMAT(datahora_fim, '%d/%m/%Y %H:%i:%s') AS datahora_fim, horas
+                FROM curso";
         $result = $this->conn->query($sql);
         return $result->fetch_all(MYSQLI_ASSOC);
     }

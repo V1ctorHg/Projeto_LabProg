@@ -30,6 +30,14 @@ class Estudante {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function readrank(){
+        $sql = "SELECT nome, pontos
+                FROM estudante
+                ORDER BY pontos DESC";
+        $result = $this->conn->query($sql);
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function readOne($matricula) {
         $sql = "SELECT * FROM estudante WHERE matricula = $matricula";
         $result = $this->conn->query($sql);

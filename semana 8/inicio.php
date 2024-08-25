@@ -60,7 +60,7 @@ $_SESSION['matricula'] = $matricula;
             <nav class="side_menu">
                 <ul class="menu_list">
                     
-                    <li><a class="about_link" href="#ranking">Ranking</a></li>
+                    <li><a class="about_link" href="ranking.php">Ranking</a></li>
                     <li><a class="about_link" href="editar.php">Editar</a></li>
                     <li><a class="about_link" href="logout.php">Logout</a></li>
                 </ul>
