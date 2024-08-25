@@ -59,12 +59,7 @@ class Organizador {
         return $result;
     }
 
-    #public function readPag($pag,$linhas) {
-        #$offset = $pag * $linhas;
-       # $sql = "SELECT * FROM organizador LIMIT $linhas OFFSET $offset";
-        #$result = $this->conn->query($sql);
-        #return $result->fetch_all(MYSQLI_ASSOC);
-    #}#
+    
 }
 
 

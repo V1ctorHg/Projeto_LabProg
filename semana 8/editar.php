@@ -95,20 +95,6 @@
             $valsenha = "CERTO";
         }
 
-<<<<<<< HEAD
-        var_dump($_SESSION['matricula']);
-        if($estavalido) {
-            if($organiza) {
-                $organizador->update($_POST);
-                $_SESSION['matricula'] = $matricula;
-                header('Location: inicio.php');
-                exit;
-            } else {
-                $estudante->update($_POST);
-                $_SESSION['matricula'] = $matricula;
-                header("Location: inicio.php?matricula=" . urlencode($matricula));
-                exit;
-=======
             if($estavalido){
                 if($organiza){
                     $organizador->update($_POST);
@@ -123,7 +109,6 @@
                     header("Location: inicio.php");
                     exit;
                 }
->>>>>>> 5521643c9b123ab0c630dffb1e62b4b15b3e091d
             }
     }
 ?>
@@ -144,16 +129,12 @@
             
                 <nav class="side_menu">
                     <ul class="menu_list">
-<<<<<<< HEAD
-                        <li><a class="about_link" href="inicio.php?matricula=<?php echo $matricula; ?>">Voltar</a></li>
-=======
                         <?php if($organiza){
                             echo '<li><a class="about_link" href="inicioOrganizador.php">Voltar</a></li>';
                         }else{
                             echo '<li><a class="about_link" href="inicio.php">Voltar</a></li>';
                         }
                         ?>
->>>>>>> 5521643c9b123ab0c630dffb1e62b4b15b3e091d
                     </ul>
                 </nav>
             </header>

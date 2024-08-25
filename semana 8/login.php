@@ -2,6 +2,7 @@
     include "connect.inc.php";
     include "estudante.class.php";
     include "organizador.class.php";
+    include "administrador.class.php";
 
     $matricula = 0;
     $action = 'insert';
@@ -22,6 +23,10 @@
     $rgaOne = $organizador->readOne('-1');
 
     $resOne = $estudante->readOne('-1');
+
+    $administrador = new Administrador($conn);
+    $radm = $administrador->read();
+    $radmOne = $administrador->readOne('-1');
 ?>
 
 
@@ -44,8 +49,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         // Verifica se a matrícula existe no banco de dados
         $resOne = $estudante->readOne($matricula);
         $rgaOne = $organizador->readOne($matricula);
+        $radmOne = $administrador->readOne($matricula);
 
-        if (empty($resOne) && empty($rgaOne)) {
+        if (empty($resOne) && empty($rgaOne) && empty($radmOne)) {
             $matriErr = "* Matrícula inválida!";
             $senErr = "";
             $EstaValido = false;
@@ -64,6 +70,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                 $senErr = "* Senha incorreta!";
                 $EstaValido = false;
             } elseif (!empty($rgaOne) && $rgaOne[0]['senha'] != $senha) {
+                $senErr = "* Senha incorreta!";
+                $EstaValido = false;
+            } elseif (!empty($radmOne) && $radmOne[0]['senha'] != $senha) {
                 $senErr = "* Senha incorreta!";
                 $EstaValido = false;
             }
@@ -96,6 +105,13 @@ if ($EstaValido) {
             'email' => $rgaOne[0]['email']
         ];
         $redirectPage = 'inicioOrganizador.php';              // Página do organizador
+    } elseif (!empty($radmOne)) {
+        $postData = [
+            'matricula_admin' => $radmOne[0]['matricula_admin'],
+            'nome' => $radmOne[0]['nome'],
+            'email' => $radmOne[0]['email']
+        ];
+        $redirectPage = 'inicioAdministrador.php';              // Página do organizador
     }
 
     echo "<form id='loginForm' action='$redirectPage' method='post'>";

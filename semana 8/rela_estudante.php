@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include "connect.inc.php";
     include "estudante.class.php";
     
@@ -20,6 +21,15 @@
 <body>
 <section class="infos">                         
         
+            <header>
+                
+
+                        <?php   echo '<li><a style="color= #000"; href="inicioAdministrador.php">Voltar</a></li>'; ?>
+                        
+                        
+                
+            </header>
+
             <table>
                 <tr>
                     <th>Matricula</th>
@@ -30,18 +40,18 @@
                     
                 </tr>
                 <?php 
-    foreach ($res as $r) {
-        echo ("
-            <tr>
-                <td>{$r['matricula']}</td>
-                <td>{$r['nome']}</td>
-                <td>{$r['email']}</td>
-                <td>{$r['senha']}</td>
+                foreach ($res as $r) {
+                    echo ("
+                        <tr>
+                            <td>{$r['matricula']}</td>
+                            <td>{$r['nome']}</td>
+                            <td>{$r['email']}</td>
+                            <td>{$r['senha']}</td>
 
-                
-            </tr>");
-    }
-?>
+                            
+                        </tr>");
+                    }
+                ?>
                     
             </table>
 </section> 

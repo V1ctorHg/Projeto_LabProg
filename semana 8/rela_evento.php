@@ -21,7 +21,16 @@
 
 </head>
 <body>
-<section class="infos">                          
+<section class="infos">
+    <header>
+                
+
+        <?php   echo '<li><a style="color= #000"; href="inicioAdministrador.php?matricula=<?php echo $matricula; ?>">Voltar</a></li>'; ?>
+                
+        
+    </header>    
+
+
         <?php if (!empty($res)): ?>
             <table>
                 <tr>

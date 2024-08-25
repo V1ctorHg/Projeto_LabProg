@@ -12,7 +12,7 @@ class Administrador {
     }
 
     public function create($post) {
-        $sql = "INSERT INTO estudante (nome, email, senha) VALUES
+        $sql = "INSERT INTO administrador (nome, email, senha) VALUES
         ('{$post['nome']}', '{$post['email']}', '{$post['senha']}')";
         print($sql);
         if ($this->conn->query($sql) === TRUE) {
@@ -54,11 +54,6 @@ class Administrador {
         return $result;
     }
 
-    #public function readPag($pag,$linhas) {
-        #$offset = $pag * $linhas;
-       # $sql = "SELECT * FROM estudante LIMIT $linhas OFFSET $offset";
-        #$result = $this->conn->query($sql);
-        #return $result->fetch_all(MYSQLI_ASSOC);
-    #}#
+    
 }
 ?>
