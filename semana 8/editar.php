@@ -93,7 +93,7 @@
             } else {
                 $estudante->update($_POST);
                 $_SESSION['matricula'] = $matricula;
-                header('Location: inicio.php');
+                header("Location: inicio.php?matricula=" . urlencode($matricula));
                 exit;
             }
         }
@@ -116,7 +116,7 @@
             
                 <nav class="side_menu">
                     <ul class="menu_list">
-                        <li><a class="about_link" href="inicio.php">Voltar</a></li>
+                        <li><a class="about_link" href="inicio.php?matricula=<?php echo $matricula; ?>">Voltar</a></li>
                     </ul>
                 </nav>
             </header>
