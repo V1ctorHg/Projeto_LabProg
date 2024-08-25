@@ -2,6 +2,8 @@
 include "connect.inc.php";
 include "organizador.class.php";
 
+$matricula_organizador = $_SESSION['matricula_organizador'];
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome_evento = htmlspecialchars($_POST['nome_evento']);
     $descricao = htmlspecialchars($_POST['descricao']);
@@ -22,9 +24,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
     $conn->close();
 
+    $_SESSION['matricula_organizador'] = $matricula;
     //header("Location: adicionar_curso.php?cod_evento=$cod_evento");
-    header("Location: inicioOrganizador.php?matricula_organizador=" . urlencode($matricula_organizador));
+    //header("Location: inicioOrganizador.php?matricula_organizador=" . urlencode($matricula_organizador));
+    header("Location: inicioOrganizador.php");
 
     exit;
 }
-?>

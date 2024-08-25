@@ -1,6 +1,7 @@
 <?php
     include "connect.inc.php";
     include "estudante.class.php";
+    include "organizador.class.php";
 
     $matricula = 0;
     $action = 'insert';
@@ -14,6 +15,7 @@
     }
 
     $estudante = new Estudante($conn);
+    $organizador = new Organizador($conn);
 
     $res = $estudante->read();
     $resOne = $estudante->readOne('-1');
@@ -97,10 +99,13 @@ if ($EstaValido) {
     } else {
         $action = $_POST['action'];
     }
-
     if ($action == 'insert') {
-        $estudante->create($_POST);
-    } else if ($action == 'update') {
+        if($_POST['tipouser'] == 'estudante'){
+            $estudante->create($_POST);
+        } else {
+            $organizador->create($_POST);
+        }
+    } else if ($action == 'update') { #precisa de um update aqui?
         $estudante->update($_POST);
     }
     
@@ -144,7 +149,13 @@ if ($EstaValido) {
                         <input type="text" name="matricula" id="matricula" placeholder="Digite sua matrícula..." value="<?php echo !empty($resOne) ? $resOne[0]['matricula'] : $matricula; ?>">
 
                         <!-- <br> -->
+                        <label for="tipouser">Tipo de Usuário: </label>
+                        <select name="tipouser" id="tipouser">
+                            <option value="estudante">Estudante</option>
+                            <option value="organizador">Organizador</option>
 
+                        </select>
+                        <br>
                         <input type="submit" name="submit" value="<?php echo $actionVal ?>">
 
                         <p class="login_text">Já possui uma conta? <a href="login.php" class="btn btn-secondary">Faça seu login</a></p>

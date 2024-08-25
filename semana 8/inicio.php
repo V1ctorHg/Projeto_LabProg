@@ -8,16 +8,19 @@
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $matricula = isset($_POST['matricula']) ? htmlspecialchars($_POST['matricula']) : '';
-} else if ($_SERVER["REQUEST_METHOD"] == "GET") { 
-    $matricula = isset($_GET['matricula']) ? htmlspecialchars($_GET['matricula']) : '';
-} else {  
+} #else if ($_SERVER["REQUEST_METHOD"] == "GET") { 
+    #$matricula = isset($_GET['matricula']) ? htmlspecialchars($_GET['matricula']) : '';
+#} 
+else if (isset($_SESSION['matricula'])) {  
     $matricula = $_SESSION['matricula'];
-    var_dump($matricula);
-    if (!$matricula) {
-        header('Location: login.php');
-        exit;
-    }
+
+} else {
+    header('Location: login.php');
+    exit;
 }
+
+$_SESSION['tipouser'] = 'estudante';
+
 
 if ($matricula) { //Pegando email e nome da matricula logada
     $stmt = $conn->prepare("SELECT nome, email FROM estudante WHERE matricula = ?");
@@ -60,7 +63,7 @@ $_SESSION['matricula'] = $matricula;
                     <li><a class="about_link" href="rela_evento.php">Relatório Evento</a></li>
                     <li><a class="about_link" href="#ranking">Ranking</a></li>
                     <li><a class="about_link" href="editar.php">Editar</a></li>
-                    <li><a class="about_link" href="login.php">Logout</a></li>
+                    <li><a class="about_link" href="logout.php">Logout</a></li>
                 </ul>
             </nav>
         </header>
