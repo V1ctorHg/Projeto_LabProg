@@ -20,48 +20,54 @@
     $result = $estudante->readrank();
 ?>
 
+<!DOCTYPE html>
 <html>  
 <head>
     <meta charset="UTF-8">
-    <title>RANKING</title>
-    <link rel="stylesheet" href="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./estilos/ranking2.css">
+    <title>RANKINGS</title>
 </head>
-<body>  
-
-    <section>
+<body>
+    <div class="container_general">
         <header>
-            <nav>
-                <ul>
+            <div class="container_top_info"></div>
+            <nav class="side_menu">
+                <ul class="menu_list">
                     <?php
                         if($_SESSION['tipouser'] == 'estudante'){
-                            echo "<li><a href='inicio.php'>Voltar</a></li>";
+                            echo "<li><a class='about_link' href='inicio.php'>Voltar</a></li>";
                         } elseif ($_SESSION['tipouser'] == 'organizador'){
-                            echo "<li><a href='inicioOrganizador.php'>Voltar</a></li>";
+                            echo "<li><a class='about_link' href='inicioOrganizador.php'>Voltar</a></li>";
                         }elseif ($_SESSION['tipouser'] == 'administrador'){
-                            echo "<li><a href='inicioAdministrador.php'>Voltar</a></li>";
+                            echo "<li><a class='about_link' href='inicioAdministrador.php'>Voltar</a></li>";
                         }
-                        ?>
+                    ?>
                 </ul>
             </nav>
         </header>
-    </section>
 
-    <h1>Ranking</h1>
-    <div>
-        <table>
-            <tr>
-                <th>Nome</th>
-                <th>Pontos</th>
-            </tr>
-            <?php
-                foreach ($result as $row) {
-                    echo "<tr>";
-                    echo "<td>".$row['nome']."</td>";
-                    echo "<td>".$row['pontos']."</td>";
-                    echo "</tr>";
-                }
-            ?>
-        </table>
+        <main>
+            <section id="ranking">
+                <h1>Ranking</h1>
+                <div class="container_table">
+                    <table>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Pontos</th>
+                        </tr>
+                        <?php
+                            foreach ($result as $row) {
+                                echo "<tr>";
+                                echo "<td>".$row['nome']."</td>";
+                                echo "<td>".$row['pontos']."</td>";
+                                echo "</tr>";
+                            }
+                        ?>
+                    </table>
+                </div>
+            </section>
+        </main>
     </div>
 </body>
 </html>
