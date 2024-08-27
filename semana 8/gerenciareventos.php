@@ -141,12 +141,6 @@
                     <input type="text" id="nome_evento" name="nome" required><br><br>
                     <label for="descricao_evento">Descrição do Evento:</label><br>
                     <input type="text" id="descricao_evento" name="descricao" required><br><br>
-    
-                    <label for="data_inicio_evento">Data de Início:</label><br>
-                    <input type="datetime-local" id="data_inicio_evento" name="datahora_ini" required><br><br>
-                    <label for="data_inicio_evento">Data de Fim:</label><br>
-                    <input type="datetime-local" id="data_fim_evento" name="datahora_fim" required><br><br>
-    
                     <input type="submit" value="Atualizar Evento">
                 </form>
             </div>
@@ -168,11 +162,6 @@
                     <input type="text" id="id_curso" name="id_curso" readonly><br><br>
                     <label for="nome_evento">Nome do Curso:</label><br>
                     <input type="text" id="nome_curso" name="nome" required><br><br>
-    
-                    <label for="data_inicio_curso">Data de Início:</label><br>
-                    <input type="datetime-local" id="data_inicio_curso" name="datahora_ini" required><br><br>
-                    <label for="data_inicio_curso">Data de Fim:</label><br>
-                    <input type="datetime-local" id="data_fim_curso" name="datahora_fim" required><br><br>
                     <label for="horas_curso">Horas do Curso:</label><br>
                     <input type="text" id="horas_curso" name="horas" required><br><br>
     
@@ -210,9 +199,7 @@
                     console.log(evento.nome); // Adicione esta linha para depuração
                     document.getElementById("id_evento").value = evento.cod_evento;
                     document.getElementById("nome_evento").value = evento.nome;
-                    document.getElementById("descricao_evento").value = evento.descricao;
-                    document.getElementById("data_inicio_evento").value = evento.datahora_ini;
-                    document.getElementById("data_fim_evento").value = evento.datahora_fim;    
+                    document.getElementById("descricao_evento").value = evento.descricao;   
             } else {
                 console.error("Erro na requisição: ", xhr.statusText);
             }
@@ -260,8 +247,6 @@
                     console.log(curso); // Adicione esta linha para depuração
                     document.getElementById("id_curso").value = curso.cod_curso;
                     document.getElementById("nome_curso").value = curso.nome;
-                    document.getElementById("data_inicio_curso").value = curso.datahora_ini;
-                    document.getElementById("data_fim_curso").value = curso.datahora_fim;    
                     document.getElementById("horas_curso").value = curso.horas;
             } else {
                 console.error("Erro na requisição: ", xhr.statusText);
