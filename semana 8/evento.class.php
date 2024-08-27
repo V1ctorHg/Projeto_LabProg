@@ -30,6 +30,15 @@ class Evento {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function readorg($orgmat) {
+        $sql = "SELECT evento.cod_evento, nome, descricao, DATE_FORMAT(datahora_ini, '%d/%m/%Y %H:%i:%s') AS datahora_ini, DATE_FORMAT(datahora_fim, '%d/%m/%Y %H:%i:%s') AS datahora_fim 
+                FROM evento
+                JOIN organizador_evento ON organizador_evento.cod_evento = evento.cod_evento
+                WHERE organizador_evento.mat_organizador = $orgmat";
+        $result = $this->conn->query($sql);
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function readOne($cod_evento) {
         $sql = "SELECT *
         FROM evento WHERE cod_evento = $cod_evento";

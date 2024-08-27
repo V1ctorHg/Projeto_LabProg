@@ -21,7 +21,7 @@
     $evento = new Evento($conn);
     $curso = new Curso($conn);
 
-    $resevento = $evento->read();
+    $resevento = $evento->readorg($matricula);
     $rescurso = $curso->read();
 ?>
 
@@ -71,9 +71,13 @@
                                     <td><?php echo htmlspecialchars($r['datahora_ini']); ?></td>
                                     <td><?php echo htmlspecialchars($r['datahora_fim']); ?></td>
                                     <td class="flex_container_cta">
-                                        <button class='event-open-modal' data-evento-id='<?php echo htmlspecialchars($r['cod_evento']); ?>'> Editar Evento</button>
-
-                                        <button class='event-open-modal' data-evento-id='<?php echo htmlspecialchars($r['cod_evento']);?>'> Editar Curso</button> 
+                                        <button class='event-open-modal' data-evento-id='<?php echo htmlspecialchars($r['cod_evento']); ?>'> Editar Evento</button> <!-- -->
+                                    </td>
+                                    <td class="flex_container_cta">
+                                        <button class='event-open-modal' data-evento-id='<?php echo htmlspecialchars($r['cod_evento']);?>'> Finalizar Evento </button> 
+                                    </td>
+                                    <td class="flex_container_cta">
+                                        <button class='event-open-modal' data-evento-id='<?php echo htmlspecialchars($r['cod_evento']);?>'> Excluir Evento </button> 
                                     </td>
                                 </tr>
                                 <tr>
@@ -95,10 +99,13 @@
                                                     <td><?php echo htmlspecialchars($curso['datahora_ini']); ?></td>
                                                     <td><?php echo htmlspecialchars($curso['horas']); ?></td>
                                                     <td>
-                                                        <button class='curso-open-modal' data-curso-id='<?php echo htmlspecialchars($curso['cod_curso']);?>'> Editar Evento</button>
+                                                        <button class='curso-open-modal' data-curso-id='<?php echo htmlspecialchars($curso['cod_curso']);?>'> Editar Curso</button>
                                                     </td>
                                                     <td>
-                                                        <button class='curso-open-modal' data-curso-id='<?php echo htmlspecialchars($curso['cod_curso']);?>'> Editar Curso</button>
+                                                        <button class='curso-open-modal' data-curso-id='<?php echo htmlspecialchars($curso['cod_curso']);?>'> Finalizar Curso</button>
+                                                    </td>
+                                                    <td>
+                                                        <button class='curso-open-modal' data-curso-id='<?php echo htmlspecialchars($curso['cod_curso']);?>'> Excluir Curso</button>
                                                     </td>
                                                 </tr>
                                             <?php endwhile; ?>
@@ -150,7 +157,7 @@
             <div class="modal-content">
             <div class="container_top_modal">
                     <h2 class="title_modal">Editar Curso</h2>
-                    <span class="close">&times;</span>
+                    <span class="closec">&times;</span>
                 </div>
                 <form id="editacursoform" action="cursoud.php" method="post">
                     <input type="hidden" id="action" name="action" value="update">
@@ -179,7 +186,10 @@
     <!-- #javascript -->
 
     <script>
-        var modal = document.getElementById("editaeventomodal");
+        var modal = document.getElementById('editaeventomodal');
+            document.querySelector('.event-open-modal').addEventListener('click', function() {
+        modal.style.display = 'block';
+        });
         var btns = document.querySelectorAll(".event-open-modal");
         var span = document.getElementsByClassName("close")[0];
 
@@ -187,7 +197,7 @@
             btn.onclick = function() {
                 var eventoId = this.getAttribute("data-evento-id");
                 document.getElementById("modal_evento_id").value = eventoId;
-
+                console.log(eventoId);
 
                 // Requisição AJAX para obter os dados do evento
                 var xhr = new XMLHttpRequest();
@@ -195,8 +205,9 @@
                 xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 xhr.onload = function(){
                 if (xhr.status == 200){
+                    console.log(xhr.responseText);
                     var evento = JSON.parse(xhr.responseText);
-                    console.log(evento); // Adicione esta linha para depuração
+                    console.log(evento.nome); // Adicione esta linha para depuração
                     document.getElementById("id_evento").value = evento.cod_evento;
                     document.getElementById("nome_evento").value = evento.nome;
                     document.getElementById("descricao_evento").value = evento.descricao;
@@ -225,9 +236,12 @@
     </script>
 
 <script>
-        var modal = document.getElementById("editacursomodal");
+        var modali = document.getElementById('editacursomodal');
+        document.querySelector('.curso-open-modal').addEventListener('click', function() {
+            modali.style.display = 'block';
+        });
         var btns = document.querySelectorAll(".curso-open-modal");
-        var span = document.getElementsByClassName("closec")[0];
+        var spanc = document.getElementsByClassName("closec")[0];
 
         btns.forEach(function(btn) {
             btn.onclick = function() {
@@ -256,16 +270,16 @@
     
                 xhr.send("cod_curso=" + encodeURIComponent(cursoId));
 
-                modal.style.display = "block";
+                modali.style.display = "block";
             }
         });
 
-        span.onclick = function() {
-            modal.style.display = "none";
+        spanc.onclick = function() {
+            modali.style.display = "none";
         }
 
         window.onclick = function(event) {
-            if (event.target == modal) {
+            if (event.target == modali) {
                 modal.style.display = "none";
             }
         }
