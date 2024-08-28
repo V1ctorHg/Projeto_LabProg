@@ -37,7 +37,8 @@ class Curso {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function delete($cod_curso){
+   
+    public function delete($cod_curso) {
         $sql = "DELETE FROM curso WHERE cod_curso = $cod_curso";
         $result = $this->conn->query($sql);
         

@@ -46,10 +46,9 @@ class Evento {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function delete($cod_evento){
+    public function delete($cod_evento) {
         $sql = "DELETE FROM evento WHERE cod_evento = $cod_evento";
         $result = $this->conn->query($sql);
-        
         return $result;
     }
 

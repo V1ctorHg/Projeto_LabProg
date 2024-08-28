@@ -73,11 +73,19 @@
                                     <td class="flex_container_cta">
                                         <button class='event-open-modal' data-evento-id='<?php echo htmlspecialchars($r['cod_evento']); ?>'> Editar Evento</button> <!-- -->
                                     </td>
-                                    <td class="flex_container_cta">
-                                        <button class='event-open-modal' data-evento-id='<?php echo htmlspecialchars($r['cod_evento']);?>'> Finalizar Evento </button> 
+                                    <td class="evclud">
+                                    <form action="eventoud.php" method="POST">
+                                        <input type="hidden" name="cod_evento" value= <?php echo ($r['cod_evento']); ?>>
+                                        <input type="hidden" name="action" value="finaliza">
+                                        <button type="submit" class="finaliza">Finalizar Evento</button>
+                                    </form> 
                                     </td>
-                                    <td class="flex_container_cta">
-                                        <button class='event-open-modal' data-evento-id='<?php echo htmlspecialchars($r['cod_evento']);?>'> Excluir Evento </button> 
+                                    <td class="evclud">
+                                        <form action="eventoud.php" method="POST">
+                                            <input type="hidden" name="cod_evento" value="<?php echo htmlspecialchars($r['cod_evento']); ?>">
+                                            <input type="hidden" name="action" value="delete">
+                                            <button type="submit" class="delete">Excluir Evento</button>
+                                        </form>
                                     </td>
                                 </tr>
                                 <tr>
@@ -95,18 +103,27 @@
                                             $result = $stmt->get_result();
                                             while ($curso = $result->fetch_assoc()): ?>
                                                 <tr>
+                                                    <?php $codc = $curso['cod_curso'];?>
                                                     <td><?php echo htmlspecialchars($curso['nome']); ?></td>
                                                     <td><?php echo htmlspecialchars($curso['datahora_ini']); ?></td>
                                                     <td><?php echo htmlspecialchars($curso['horas']); ?></td>
                                                     <td>
                                                         <button class='curso-open-modal' data-curso-id='<?php echo htmlspecialchars($curso['cod_curso']);?>'> Editar Curso</button>
                                                     </td>
-                                                    <td>
-                                                        <button class='curso-open-modal' data-curso-id='<?php echo htmlspecialchars($curso['cod_curso']);?>'> Finalizar Curso</button>
-                                                    </td>
-                                                    <td>
-                                                        <button class='curso-open-modal' data-curso-id='<?php echo htmlspecialchars($curso['cod_curso']);?>'> Excluir Curso</button>
-                                                    </td>
+                                                    <td class="evclud">
+                                                        <form action="cursoud.php" method="POST">
+                                                        <input type="hidden" name="cod_curso" value="<?php echo htmlspecialchars($codc); ?>">
+                                                        <input type="hidden" name="action" value="finaliza">
+                                                            <button type="submit" class="finaliza">Finalizar Curso</button>
+                                                        </form> 
+                                                        </td>
+                                                        <td class="evclud">
+                                                        <form action="cursoud.php" method="POST">
+                                                        <input type="hidden" name="cod_curso" value="<?php echo htmlspecialchars($codc); ?>">
+                                                        <input type="hidden" name="action" value="delete">
+                                                            <button type="submit" class="delete">Excluir Curso</button>
+                                                        </form> 
+                                                        </td>
                                                 </tr>
                                             <?php endwhile; ?>
                                             <?php $stmt->close(); ?>

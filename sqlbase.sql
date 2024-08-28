@@ -44,8 +44,8 @@ CREATE TABLE inscricoes(
     mat_estudante INTEGER NOT NULL,
     cod_curso INTEGER NOT NULL,
     
-    FOREIGN KEY (mat_estudante) REFERENCES estudante(matricula),
-    FOREIGN KEY (cod_curso) REFERENCES curso(cod_curso)
+    FOREIGN KEY (mat_estudante) REFERENCES estudante(matricula) ON DELETE CASCADE,
+    FOREIGN KEY (cod_curso) REFERENCES curso(cod_curso) ON DELETE CASCADE
 );
 
 CREATE TABLE evento_curso(
@@ -53,8 +53,8 @@ CREATE TABLE evento_curso(
     cod_evento INTEGER NOT NULL,
     cod_curso INTEGER NOT NULL,
     
-    FOREIGN KEY (cod_evento) REFERENCES evento(cod_evento),
-    FOREIGN KEY (cod_curso) REFERENCES curso(cod_curso)
+    FOREIGN KEY (cod_evento) REFERENCES evento(cod_evento) ON DELETE CASCADE,
+    FOREIGN KEY (cod_curso) REFERENCES curso(cod_curso) ON DELETE CASCADE
 );
 
 CREATE TABLE organizador_evento(
@@ -62,6 +62,12 @@ CREATE TABLE organizador_evento(
     mat_organizador INTEGER NOT NULL,
     cod_evento INTEGER NOT NULL,
     
-    FOREIGN KEY (mat_organizador) REFERENCES organizador(matricula_organizador),
-    FOREIGN KEY (cod_evento) REFERENCES evento(cod_evento)
+    FOREIGN KEY (mat_organizador) REFERENCES organizador(matricula_organizador) ON DELETE CASCADE,
+    FOREIGN KEY (cod_evento) REFERENCES evento(cod_evento) ON DELETE CASCADE
 );
+
+
+
+
+    
+    

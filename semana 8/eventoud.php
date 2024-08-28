@@ -20,14 +20,35 @@
     $evento = new Evento($conn);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $cod_evento = $_POST['cod_evento'];
    if($_POST['action'] == 'update'){
         $evento->update($_POST);
     } else if($_POST['action'] == 'delete'){
-        //$cod_evento = $_POST['cod_evento'];
-        //$evento->delete($cod_evento);
-   }
-    
+        $evento->delete($cod_evento);           
+    }else if($_POST['action'] == 'finaliza'){
+        $stmt = $conn->prepare("
+            UPDATE estudante 
+            SET pontos = COALESCE(pontos, 0) + 10  
+            WHERE matricula IN (
+                SELECT mat_estudante 
+                FROM inscricoes 
+                WHERE cod_curso IN (
+                    SELECT cod_curso
+                    FROM evento_curso
+                    WHERE cod_evento = ?)
+            )
+        ");
+        $stmt->bind_param("i", $cod_evento);
+        $stmt->execute();
+
+        $evento->delete($_POST['cod_evento']);
+    }
+}
+
+
+        
     header("Location: gerenciareventos.php");
 
     exit;
-}
+
+?>
