@@ -80,6 +80,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $matriErr = "Matricula necessária!";
   } else {
     $matricula = test_input($_POST["matricula"]);
+    if (!ctype_digit($matricula)) {
+        $EstaValido = false;
+        $matriErr = "A matrícula deve conter apenas números!";
+    }else
     $valmat = "CERTO";
   }
 }
@@ -147,7 +151,7 @@ if ($EstaValido) {
                         <!-- <br> -->
                         <label for="matricula">Matricula: </label>
                         <input type="text" name="matricula" id="matricula" placeholder="Digite sua matrícula..." value="<?php echo !empty($resOne) ? $resOne[0]['matricula'] : $matricula; ?>">
-
+                        <span class="error">* <?php echo $matriErr;?></span>
                         <!-- <br> -->
                         <label for="tipouser">Tipo de Usuário: </label>
                         <select name="tipouser" id="tipouser">

@@ -288,3 +288,7 @@ td {
     place-items: center;
     border-collapse: collapse;
 }
+
+.span_livre{
+    margin-left: 15vw;
+}

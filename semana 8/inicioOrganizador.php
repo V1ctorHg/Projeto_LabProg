@@ -58,7 +58,7 @@ $eventos = [];
 <head>
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./estilos/organizador2.css">
+    <link rel="stylesheet" href="./estilos/organizador.css">
     <title>INÍCIO — <?php echo $nome; ?></title>
 </head>
 <body>
@@ -155,7 +155,7 @@ $eventos = [];
                         </table>
                     <?php else: ?>
                         <!-- Mensagem se não houver eventos -->
-                        <p>Sem Eventos no momento.</p>
+                        <p class="span_livre">Sem Eventos no momento.</p>
                     <?php endif; ?>
                 </section>
             </div>

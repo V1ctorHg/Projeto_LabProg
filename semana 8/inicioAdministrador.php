@@ -43,7 +43,7 @@ $_SESSION['matricula'] = $matricula;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./estilos/inicio.css">
+    <link rel="stylesheet" href="./estilos/inicio2.css">
     <title>INÍCIO — <?php echo $nome; ?></title>
 </head>
 <body>

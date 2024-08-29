@@ -46,11 +46,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         $EstaValido = false;
     } else {
         $matricula = test_input($_POST["matricula"]);
+
+        if (!ctype_digit($matricula)) {
+            $matriErr = "* Matrícula deve conter apenas números!";
+            $EstaValido = false;
+        }else{
         // Verifica se a matrícula existe no banco de dados
         $resOne = $estudante->readOne($matricula);
         $rgaOne = $organizador->readOne($matricula);
         $radmOne = $administrador->readOne($matricula);
-
+    }
         if (empty($resOne) && empty($rgaOne) && empty($radmOne)) {
             $matriErr = "* Matrícula inválida!";
             $senErr = "";
