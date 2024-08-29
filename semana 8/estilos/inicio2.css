@@ -114,6 +114,21 @@ th {
     color: white;
 }
 
+table #subs {
+    padding: .5em;
+    margin: .5em;
+
+    border: none;
+    outline: none;
+    font-family: var(--mainTitleFont);
+    font-size: 1.05em;
+
+    background-color: var(--b);
+    color: var(--w);
+
+    cursor: pointer;
+}
+
 tr:nth-child(even) {
     background-color: var(--fontColor2);
 }

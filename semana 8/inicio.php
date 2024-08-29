@@ -45,7 +45,7 @@ $_SESSION['matricula'] = $matricula;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./estilos/inicio.css">
+    <link rel="stylesheet" href="./estilos/inicio2.css">
     <title>INÍCIO — <?php echo $nome; ?></title>
 </head>
 
@@ -77,7 +77,7 @@ $_SESSION['matricula'] = $matricula;
                             <th>Nome (Curso)</th>
                             <th>Data do Evento</th>
                             <th>Duração</th>
-                            <th>Inscrever-se</th>
+                            <th>Ação</th>
                         </tr>
                         <?php
                         foreach ($res as $r) {
@@ -108,7 +108,7 @@ $_SESSION['matricula'] = $matricula;
                                 echo "<form action='inscricao.php' method='post'>
                                         <input type='hidden' name='cod_curso' value='{$r['cod_curso']}'>
                                         <input type='hidden' name='matricula' value='{$matricula}'>
-                                        <button type='submit' name='desinscrever'>Desinscrever-se</button>
+                                        <button type='submit' id='subs' name='desinscrever'>Desinscrever-se</button>
                                       </form>";
                             } elseif ($hasDateConflict) {
                                 echo "<button disabled>Conflito de Data</button>";
@@ -116,7 +116,7 @@ $_SESSION['matricula'] = $matricula;
                                 echo "<form action='inscricao.php' method='post'>
                                         <input type='hidden' name='cod_curso' value='{$r['cod_curso']}'>
                                         <input type='hidden' name='matricula' value='{$matricula}'>
-                                        <button type='submit' name='inscrever'>Inscrever-se</button>
+                                        <button type='submit' id='subs' name='inscrever'>Inscrever-se</button>
                                       </form>";
                             }
                             echo "</td></tr>";
