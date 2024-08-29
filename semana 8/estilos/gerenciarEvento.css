@@ -24,8 +24,9 @@
     display: flex;
 }
 
-/* ----- OPÇÃO MENU SIDEBAR ----- */
 header {
+    position: fixed;
+    /* border: 3px solid red; */
     padding: 1em;
     
     min-height: 100vh;
@@ -51,118 +52,42 @@ header {
     font-weight: 600;
 }
 
-header .container_top_info {
-    color: var(--w);
+/* ----- GERENCIAR EVENTOS ----- */
+main {
+    margin: 0 0 2em 14vw;
+
+    min-width: 85vw;
+    display: grid;
+    place-items: center;
 }
 
-header .container_top_info .text_info {
-    line-height: 1em;
-    font-family: var(--mainSubTextFont);
-}
+.container_table h1 {
+    margin-bottom: 1em;
 
-header .container_top_info .username {
-    font-style: italic;
-    font-size: 1.3em;
-}
-
-header .container_top_info .user_email {
-    color: var(--fontColor1);
-    font-size: .9em;
-}
-
-header .container_top_info .user_mat {
-    margin-top: 1em;
-}
-
-header .container_top_info .text_info .bold {
-    font-style: normal;
-    font-weight: 600;
-}
-
-/* ----- OPÇÃO CRIAR EVENTO ----- */
-#event h2 {
-    margin-top: .5em;
     font-family: var(--mainTitleFont);
     font-size: 2.7em;
-    text-align: center;
 
+    text-align: center;
+}
+
+.flex_container_cta {
+    display: flex;
+    flex-direction: column;
     /* border: 3px solid red; */
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-form label {
-    margin: 1em 0 .3em 0;
-}
-
-form > #nome_evento, #data_inicio, #data_fim {
-    width: 20em;
-    height: 1.6em;
-}
-
-form #desc {
-    width: 20em;
-}
-
-form textarea {
-    border: 2px solid var(--b);
+.event-open-modal {
     padding: 1em;
-}
 
-form input[type="text"] {
-    border: 2px solid var(--b);
-    padding: 1em;
-}
-
-form input[type="datetime-local"] {
-    border: 2px solid var(--b);
-    padding: 1em;
-}
-
-form input[type="submit"] {
-    padding: 1em;
-    width: 8em;
-    margin-top: 1em;
-
-    background-color: var(--bgColor);
+    background-color: var(--b);
     border: .01em solid var(--w);
     color: var(--w);
-
-    transition: font-weight .2s;
 }
 
-form .criar_curso {
-    margin-bottom: 5em;
-}
-
-form input[type="submit"]:hover {
-    font-weight: bold;
+.event-open-modal:hover {
     cursor: pointer;
 }
 
-/* ----- OPÇÃO IMPRIMIR EVENTO ----- */
-.no_courses{
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
-
-    min-height: 100vh;
-
-    display: grid;
-    place-items: center;
-
-    font-family: var(--mainTitleFont);
-    font-size: 2em;
-}
-
-.flex_container {
-    min-width: 85vw;
-}
 
 .first_table {
     display: grid;
@@ -192,7 +117,7 @@ td {
     line-height: 1.3em;
 }
 
-.open-modal {
+.curso-open-modal {
     padding: 1em;
 
     background-color: var(--b);
@@ -200,7 +125,7 @@ td {
     color: var(--w);
 }
 
-.open-modal:hover {
+.curso-open-modal:hover {
     cursor: pointer;
 }
 
@@ -231,7 +156,7 @@ td {
     cursor: pointer;
 }
 
-.modal {
+.edit_modal {
     display: none;
     position: fixed;
     z-index: 1;
@@ -250,3 +175,60 @@ td {
     border: 1px solid #888;
     width: 30em;
 }
+
+
+
+
+/* .container_forms {
+    min-width: 85vw;
+}
+
+.container_forms form {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+} */
+
+/* .container_forms .title {
+    font-family: var(--mainTitleFont);
+    font-size: 3em;
+    margin-bottom: 1em;
+} */
+
+/* form label {
+    font-family: var(--mainTitleFont);
+    font-size: 1.1em;
+} */
+
+/* form input[type="text"], input[type="email"] {
+    border: 2px solid var(--b);
+    padding: 1em;
+    width: 20em;
+} */
+
+/* form > #matricula {
+    margin-bottom: 1.5em;
+} */
+
+/* form input[type="submit"] {
+    width: 8em;
+    padding: 1em;
+    
+    background-color: var(--bgColor);
+    border: .01em solid var(--w);
+    color: var(--w);
+    
+    transition: font-weight .2s;
+} */
+
+/* form input[type="submit"]:hover {
+    font-weight: bold;
+    cursor: pointer;
+} */
+
+/* form .error {
+    margin-bottom: 1em;
+} */
