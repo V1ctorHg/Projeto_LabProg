@@ -258,3 +258,33 @@ td {
     border: 1px solid #888;
     width: 30em;
 }
+
+/* ----- OPÇÃO ADICIONAR CURSO ----- */
+#fixed_header {
+    position: fixed;
+}
+
+#rel_stud_main {
+    margin: 0 0 0 15vw;
+    /* border: 3px solid red; */
+    min-width: 85vw;
+    min-height: 100vh;
+
+    display: grid;
+    place-items: center;
+}
+
+.container_table h1 {
+    margin-bottom: 1em;
+
+    font-family: var(--mainTitleFont);
+    font-size: 2.7em;
+
+    text-align: center;
+}
+
+.table {
+    display: grid;
+    place-items: center;
+    border-collapse: collapse;
+}

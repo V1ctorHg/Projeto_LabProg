@@ -16,46 +16,46 @@
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./estilos/organizador.css">
-
+    <title>RELATÓRIO — ESTUDANTE</title>
 </head>
 <body>
-<section class="infos">                         
+    <div class="container_general">
+        <header id="fixed_header">
+            <div class="container_top_info"></div>
+            <nav class="side_menu">
+                <ul class="menu_list">
+                    <?php echo '<li><a class="about_link" href="inicioAdministrador.php">Voltar</a></li>'; ?>
+                </ul>
+            </nav>
+        </header>
         
-            <header>
-                
-
-                        <?php   echo '<li><a style="color= #000"; href="inicioAdministrador.php">Voltar</a></li>'; ?>
-                        
-                        
-                
-            </header>
-
-            <table>
-                <tr>
-                    <th>Matricula</th>
-                    <th>Nome</th>
-                    <th>Email</th>
-                    <th>Senha</th>
-                    
-                    
-                </tr>
-                <?php 
-                foreach ($res as $r) {
-                    echo ("
+        <main id="rel_stud_main">
+            <div class="container_table">
+                <h1>Gerenciar Eventos e Cursos</h1>
+                <div class="table_info">
+                    <table class="table">
                         <tr>
-                            <td>{$r['matricula']}</td>
-                            <td>{$r['nome']}</td>
-                            <td>{$r['email']}</td>
-                            <td>{$r['senha']}</td>
-
-                            
-                        </tr>");
-                    }
-                ?>
+                            <th>Matricula</th>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Senha</th>
+                        </tr>
                     
-            </table>
-</section> 
-
-
+                        <?php
+                        foreach ($res as $r) {
+                            echo ("
+                                <tr>
+                                    <td>{$r['matricula']}</td>
+                                    <td>{$r['nome']}</td>
+                                    <td>{$r['email']}</td>
+                                    <td>{$r['senha']}</td>
+                                </tr>");
+                            }
+                        ?>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
 </body>
 </html>
