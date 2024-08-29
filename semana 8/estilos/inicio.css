@@ -20,10 +20,6 @@
     --fontColor2: #e4e4e4;
 }
 
-body {
-    /* background-color: gray; */
-}
-
 .container_general {
     display: flex;
 }
@@ -87,10 +83,6 @@ header .container_top_info .text_info .bold {
 }
 
 .no_courses{
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
-
     min-height: 100vh;
 
     display: grid;
@@ -107,7 +99,6 @@ table {
     align-items: center;
     justify-content: center;
 
-    border: 3px solid red;
     border-collapse: collapse;
     text-align: left;
 }
