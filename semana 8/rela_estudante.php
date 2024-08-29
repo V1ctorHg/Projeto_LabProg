@@ -16,7 +16,7 @@
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./estilos/organizador.css">
-    <title>RELATÓRIO — ESTUDANTE</title>
+    <title>RELATÓRIO — ESTUDANTES</title>
 </head>
 <body>
     <div class="container_general">
@@ -31,7 +31,7 @@
         
         <main id="rel_stud_main">
             <div class="container_table">
-                <h1>Gerenciar Eventos e Cursos</h1>
+                <h1>Relatório dos Estudantes</h1>
                 <div class="table_info">
                     <table class="table">
                         <tr>
