@@ -66,6 +66,26 @@ CREATE TABLE organizador_evento(
     FOREIGN KEY (cod_evento) REFERENCES evento(cod_evento) ON DELETE CASCADE
 );
 
+DELIMITER //
+
+CREATE TRIGGER finaliza_delete
+AFTER DELETE ON curso
+FOR EACH ROW
+BEGIN
+    DELETE FROM inscricoes WHERE cod_curso = OLD.cod_curso;
+END//
+
+CREATE TRIGGER finaliza_delete_evento
+BEFORE DELETE ON evento
+FOR EACH ROW
+BEGIN
+    DELETE FROM curso WHERE cod_curso IN (
+        SELECT cod_curso FROM evento_curso WHERE cod_evento = OLD.cod_evento
+    );
+END//
+
+DELIMITER ;
+
 
 
 

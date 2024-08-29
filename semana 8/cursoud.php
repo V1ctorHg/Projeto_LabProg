@@ -34,7 +34,9 @@
                 FROM inscricoes 
                 WHERE cod_curso = ?)");
             $stmt->bind_param("i", $_POST['cod_curso']);
-            
+            $stmt->execute();
+
+
             $curso->delete($_POST['cod_curso']);
         }
 
