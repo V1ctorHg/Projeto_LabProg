@@ -66,7 +66,7 @@ CREATE TABLE organizador_evento(
     FOREIGN KEY (cod_evento) REFERENCES evento(cod_evento) ON DELETE CASCADE
 );
 
-DELIMITER //
+/*DELIMITER //    Não está funcionando
 
 CREATE TRIGGER finaliza_delete
 AFTER DELETE ON curso
@@ -84,7 +84,8 @@ BEGIN
     );
 END//
 
-DELIMITER ;
+
+DELIMITER ;*/ 
 
 
 
