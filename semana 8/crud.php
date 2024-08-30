@@ -129,7 +129,7 @@ if ($EstaValido) {
     <body>
         <!-- Conteúdo -->
         <main>
-            <a href="./sobre.html" class="home">SISCEA</a>
+            <a href="./index.html" class="home">SISCEA</a>
             <section class="container_general">
                 <div class="container_form">
                     <form action="<?php echo $FormularioAcao; ?>" method="post">
