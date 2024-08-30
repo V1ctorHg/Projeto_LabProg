@@ -53,7 +53,7 @@
                             </tr>
                         <tr>
                             <td colspan="6">
-                                <table border="1" width="100%">
+                                <table width="100%">
                                     <tr>
                                         <th>Nome do Curso</th>
                                         <th>Data de Início</th>

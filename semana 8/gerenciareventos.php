@@ -123,6 +123,9 @@
                                                         <input type="hidden" name="action" value="delete">
                                                             <button type="submit" class="delete">Excluir Curso</button>
                                                         </form> 
+                                                        <td>
+                                                        <button type="submit" class="finaliza"> <a href="rela_eventos_estudante.php?cod_curso=<?php echo htmlspecialchars($curso['cod_curso']); ?>" class="ver-inscritos-btn">Ver Inscritos</button>
+                                                        </td>
                                                         </td>
                                                 </tr>
                                             <?php endwhile; ?>
